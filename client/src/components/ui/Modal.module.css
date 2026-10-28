@@ -1,0 +1,117 @@
+/* Hộp thoại tối: thẻ <dialog> gốc, nền phủ mờ; mobile = bottom sheet */
+.dialog {
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  margin: auto;
+  overflow: visible;
+  border: 0;
+  background: none;
+  color: var(--color-bone);
+}
+.sm {
+  width: min(420px, calc(100vw - 32px));
+}
+.dialog::backdrop {
+  background: rgba(5, 8, 7, 0.72);
+  backdrop-filter: blur(3px);
+}
+.dialog[open] {
+  animation: enter 0.35s var(--ease-magic) both;
+}
+.dialog[open]::backdrop {
+  animation: fade 0.3s both;
+}
+/* Khung góc vàng (.corners) nằm ở vỏ ngoài; chỉ phần .scroll bên trong mới cuộn,
+   nếu không các góc nhô -1px sẽ làm hiện thanh cuộn thừa */
+.card {
+  display: flex;
+  max-height: calc(100dvh - 32px);
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px;
+}
+.scroll {
+  min-height: 0;
+  margin-right: -12px;
+  padding-right: 12px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(181, 148, 106, 0.45) transparent;
+}
+.head {
+  position: relative;
+  padding-right: 36px;
+}
+.chapter {
+  margin: 0 0 4px;
+  font: italic 600 14px var(--font-heading);
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+}
+.title {
+  margin: 0;
+  font: 700 26px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.title em {
+  font-style: normal;
+  color: var(--color-gold);
+}
+.close {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: var(--color-bone-2);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.close:hover:not(:disabled) {
+  color: var(--color-gold-hi);
+}
+.close:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes sheet {
+  from {
+    transform: translateY(100%);
+  }
+}
+@media (max-width: 600px) {
+  .dialog,
+  .sm {
+    width: 100%;
+    max-width: 100%;
+    margin: auto 0 0;
+  }
+  .card {
+    max-height: 92dvh;
+    padding: 22px 20px 24px;
+    border-radius: 14px 14px 0 0;
+  }
+  .dialog[open] {
+    animation: sheet 0.35s var(--ease-magic) both;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open],
+  .dialog[open]::backdrop {
+    animation: none;
+  }
+}

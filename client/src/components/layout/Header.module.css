@@ -1,0 +1,161 @@
+/* Header cửa hàng — chép từ demo 07 (header, .hd, nav.main, .drawer). Nút .ic / .badge ở styles/ui.css */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(rgba(14, 19, 17, 0.92), rgba(14, 19, 17, 0.75));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(181, 148, 106, 0.2);
+  transition: transform 0.5s var(--ease-magic);
+}
+/* Cuộn xuống quá 300px thì trượt lên ẩn (hooks/useScrollFx gắn body.scroll-down) */
+:global(body.scroll-down) .header {
+  transform: translateY(-100%);
+}
+.hd {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  height: 76px;
+}
+
+/* ---------- Menu chính ---------- */
+.nav {
+  display: flex;
+  gap: 2px;
+}
+.nav > a {
+  position: relative;
+  display: block;
+  padding: 10px 13px;
+  font: 600 17px var(--font-heading);
+  letter-spacing: 0.03em;
+  color: var(--color-bone-2);
+  transition:
+    color 0.3s,
+    text-shadow 0.3s;
+}
+.nav > a:hover,
+.nav > a[aria-current='page'] {
+  color: var(--color-gold-hi);
+  text-shadow: 0 0 12px rgba(226, 196, 143, 0.6);
+}
+/* Ngôi sao nhỏ nảy ra dưới chữ khi hover */
+.nav > a::before {
+  content: '✦';
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  font-size: 9px;
+  color: var(--color-gold);
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.4s var(--ease-spring);
+}
+.nav > a:hover::before {
+  transform: translateX(-50%) scale(1);
+}
+
+.icons {
+  display: flex;
+  gap: 4px;
+}
+.burger {
+  display: none;
+}
+
+/* ---------- Drawer danh mục (mobile) ---------- */
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+.drawer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: 0.4s;
+}
+.drawerIn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: min(330px, 86vw);
+  padding: 24px;
+  overflow-y: auto;
+  background: var(--color-night-2);
+  border-right: 1px solid var(--color-gold);
+  transform: translateX(-100%);
+  transition: 0.5s var(--ease-magic);
+}
+.drawer[data-open] {
+  pointer-events: auto;
+}
+.drawer[data-open]::before {
+  opacity: 1;
+}
+.drawer[data-open] .drawerIn {
+  transform: none;
+}
+.drawer a,
+.drawer button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.2);
+  font: 700 19px var(--font-heading);
+  color: var(--color-bone);
+}
+.drawer button {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+.drawer button:disabled {
+  opacity: 0.5;
+}
+.drawer a svg,
+.drawer button svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-gold);
+}
+.drawerTitle {
+  margin: 22px 0 4px;
+  font: italic 600 15px var(--font-heading);
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+}
+.drawerTitle:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 1180px) {
+  .nav {
+    display: none;
+  }
+  .burger {
+    display: grid;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding-bottom: 58px;
+  }
+  .hd {
+    gap: 10px;
+    height: 64px;
+  }
+  .icons {
+    margin-left: auto;
+  }
+  .icons > :not(.keepMobile) {
+    display: none;
+  }
+}

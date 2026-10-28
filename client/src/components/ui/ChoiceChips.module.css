@@ -1,0 +1,62 @@
+.set {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.legend {
+  padding: 0;
+  margin-bottom: 6px;
+  font: italic 600 15px var(--font-heading);
+  letter-spacing: 0.04em;
+  color: var(--color-gold);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.item {
+  position: relative;
+  cursor: pointer;
+}
+.item input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.chip {
+  min-width: 72px;
+  padding: 8px 18px;
+  text-align: center;
+  font: 600 16px var(--font-heading);
+}
+.item input:checked + .chip {
+  background: rgba(181, 148, 106, 0.18);
+  color: var(--color-gold-hi);
+  border-color: var(--color-gold-hi);
+}
+.item input:focus-visible + .chip {
+  outline: 2px solid var(--color-gold-hi);
+  outline-offset: 2px;
+}
+
+.stack {
+  flex-direction: column;
+  gap: 8px;
+}
+.stack .chip {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 16px;
+  text-align: left;
+  font: 500 16px var(--font-body);
+}
+.toggle {
+  min-width: 0;
+  padding: 5px 14px;
+  font-size: 15px;
+}
+.strong {
+  font-weight: 800;
+}

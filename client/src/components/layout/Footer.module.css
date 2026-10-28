@@ -1,0 +1,59 @@
+/* Footer — demo 07 (footer.site, .ft, .ft-b) */
+.site {
+  position: relative;
+  margin-top: 160px;
+  padding: 70px 0 30px;
+  border-top: 1px solid rgba(181, 148, 106, 0.3);
+  background: linear-gradient(var(--color-night), #070a09);
+}
+.ft {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 40px;
+}
+.ft p {
+  max-width: 300px;
+  margin-top: 14px;
+  color: var(--color-bone-2);
+  font-size: 15px;
+}
+.ft h5 {
+  margin-bottom: 12px;
+  font: 700 20px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.ft ul {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  color: var(--color-bone-2);
+  font-size: 15px;
+}
+.ft ul a {
+  transition: color 0.3s;
+}
+.ft ul a:hover {
+  color: var(--color-gold-hi);
+}
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(181, 148, 106, 0.15);
+  color: #6f776f;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .ft {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .ft {
+    grid-template-columns: 1fr;
+  }
+}

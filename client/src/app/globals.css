@@ -1,0 +1,116 @@
+/* Thứ tự layer: utilities của Tailwind đứng sau mui → class Tailwind ghi đè được style MUI */
+@layer theme, base, mui, components, utilities;
+@import 'tailwindcss';
+/* Chuyển động + "viên gạch" giao diện dùng chung — docs/06-ui-ux/components.md mục 0 */
+@import '../styles/motion.css';
+@import '../styles/ui.css' layer(components);
+
+/*
+ * Màu theo vai trò khai báo MỘT chỗ ở src/theme/theme.ts.
+ * MUI (cssVariables: true) sinh ra các biến --mui-*; Tailwind đọc lại tại đây.
+ * Ví dụ: class `text-primary`, `bg-sale`, `border-border`.
+ */
+@theme inline {
+  --color-primary: var(--mui-palette-primary-main);
+  --color-primary-light: var(--mui-palette-primary-light);
+  --color-primary-dark: var(--mui-palette-primary-dark);
+  --color-secondary: var(--mui-palette-secondary-main);
+  --color-sale: var(--mui-palette-error-main);
+  --color-success: var(--mui-palette-success-main);
+  --color-text: var(--mui-palette-text-primary);
+  --color-text-muted: var(--mui-palette-text-secondary);
+  --color-border: var(--mui-palette-divider);
+  --color-background: var(--mui-palette-background-default);
+  --color-paper: var(--mui-palette-background-paper);
+
+  /* Font nạp bằng next/font ở app/layout.tsx */
+  --font-display: var(--nf-display), serif;
+  --font-heading: var(--nf-heading), serif;
+  --font-body: var(--nf-body), Georgia, serif;
+  --font-sans: var(--nf-body), Georgia, serif;
+}
+
+/*
+ * Bảng màu gốc Dark Fantasy (demo 07) — dùng trong CSS module: var(--color-gold-hi)…
+ * Giữ khớp với `palette` trong theme.ts. docs/06-ui-ux/design-system.md mục 2.
+ */
+@theme {
+  --color-night: #0e1311;
+  --color-night-2: #121a17;
+  --color-forest: #17251f;
+  --color-moss: #2c4a3e;
+  --color-moss-2: #1f3530;
+  --color-gold: #b5946a;
+  --color-gold-hi: #e2c48f;
+  --color-bone: #efe8dc;
+  --color-bone-2: #b9b2a4;
+  --color-parch: #d9bd93;
+  --color-parch-2: #c39f74;
+  --color-ink: #2a1d10;
+  --color-blood: #8e2b2b;
+  --color-ember: #e0803e;
+
+  --ease-magic: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.2, 1.4, 0.4, 1);
+
+  /* 3 mốc của demo (dùng dạng max-*: max-desk, max-tab, max-phone) — design-system mục 6 */
+  --breakpoint-phone: 40rem; /* 640px */
+  --breakpoint-tab: 56.25rem; /* 900px */
+  --breakpoint-desk: 73.75rem; /* 1180px */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font: 17px/1.6 var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-night);
+}
+
+/* Con trỏ Dark Fantasy (ClickDust bật lớp has-cursor) — SVG trong public/cursors, điểm bấm ở đầu mũi (8,7) */
+body.has-cursor {
+  cursor:
+    url('/cursors/arrow.svg') 8 7,
+    auto;
+}
+body.has-cursor :is(a, button, label, summary, select, [role='button'], [data-wand-hover]),
+body.has-cursor .cursor-pointer,
+body.has-cursor input:is([type='checkbox'], [type='radio'], [type='submit'], [type='button']) {
+  cursor:
+    url('/cursors/pointer.svg') 8 7,
+    pointer;
+}
+body.has-cursor
+  :is(input, textarea, [contenteditable='true']):not(
+    [type='checkbox'],
+    [type='radio'],
+    [type='submit'],
+    [type='button']
+  ) {
+  cursor: text;
+}
+body.has-cursor :disabled {
+  cursor: not-allowed;
+}
+
+/* Khung nội dung cũ — trang chưa làm lại vẫn dùng */
+@utility container-page {
+  width: 100%;
+  max-width: 1540px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+/* Khung nội dung Dark Fantasy: 1240px, lề 16px mỗi bên */
+@utility wrap {
+  width: min(1240px, 100% - 32px);
+  margin-inline: auto;
+}

@@ -1,0 +1,86 @@
+/* Ô nhập native có nhãn + lỗi; thân ô dùng .field của ui.css */
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.label {
+  font: italic 600 15px var(--font-heading);
+  letter-spacing: 0.04em;
+  color: var(--color-gold);
+}
+.row {
+  position: relative;
+}
+.input {
+  height: 48px;
+}
+.row:has(.eye) .input {
+  padding-right: 48px;
+}
+.eye {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  width: 48px;
+  height: 100%;
+  place-items: center;
+  color: var(--color-bone-2);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.eye:hover,
+.eye[aria-pressed='true'] {
+  color: var(--color-gold-hi);
+}
+.eye svg {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.adorn {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  translate: 0 -50%;
+  color: var(--color-gold-hi);
+  pointer-events: none;
+}
+.hint,
+.error {
+  margin: 0;
+  font-size: 13px;
+}
+.hint {
+  color: var(--color-bone-2);
+}
+.error {
+  color: #e0766a;
+}
+/* Ô ngày gốc của trình duyệt: lịch nền tối, biểu tượng lịch màu vàng */
+.input[type='date'] {
+  color-scheme: dark;
+}
+.input[type='date']::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.7;
+  filter: sepia(1) saturate(2.5) brightness(1.1);
+}
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Ô nhiều dòng + dòng gợi ý có bộ đếm bên phải */
+.area {
+  height: auto;
+  padding: 12px 14px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.count {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}

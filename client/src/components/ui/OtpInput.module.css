@@ -1,0 +1,44 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 48px));
+  gap: 10px;
+}
+.cell {
+  width: 100%;
+  height: 56px;
+  padding: 0;
+  text-align: center;
+  background: rgba(239, 232, 220, 0.05);
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  border-radius: 4px;
+  color: var(--color-gold-hi);
+  font: 700 24px var(--font-heading);
+  outline: none;
+  transition: 0.3s;
+}
+.cell:focus {
+  border-color: var(--color-gold-hi);
+  box-shadow: 0 0 0 3px rgba(226, 196, 143, 0.12);
+}
+.row[data-invalid='true'] .cell {
+  border-color: #e0766a;
+}
+.error {
+  margin: 0;
+  font-size: 13px;
+  color: #e0766a;
+}
+@media (max-width: 400px) {
+  .row {
+    gap: 6px;
+  }
+  .cell {
+    height: 50px;
+  }
+}

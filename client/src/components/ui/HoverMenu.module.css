@@ -1,0 +1,42 @@
+/* Hộp thả xuống dưới icon Header (tài khoản, thông báo) */
+.root {
+  position: relative;
+}
+/* Vùng đệm trong suốt phía trên để chuột đi từ icon xuống hộp không bị rời */
+.drop {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 70;
+  padding-top: 12px;
+}
+.pop {
+  position: relative;
+  transform-origin: top right;
+  animation: pop-in 0.28s var(--ease-magic);
+}
+/* Mũi tên chỉ về icon (căn theo mép phải, giữa icon 42px) */
+.pop::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  right: 15px;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid rgba(181, 148, 106, 0.55);
+  border-left: 1px solid rgba(181, 148, 106, 0.55);
+  background: var(--color-night-2);
+  rotate: 45deg;
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    scale: 0.94;
+    translate: 0 -8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pop {
+    animation: none;
+  }
+}

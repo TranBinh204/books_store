@@ -1,0 +1,25 @@
+.wrap {
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  font-size: 30px;
+  color: var(--color-gold-hi);
+}
+.fill {
+  flex: 1;
+  padding: 64px 20px;
+}
+.wrap span {
+  text-shadow: 0 0 14px rgba(226, 196, 143, 0.6);
+  animation: spin 1.6s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wrap span {
+    animation: none;
+  }
+}

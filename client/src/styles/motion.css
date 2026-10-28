@@ -1,0 +1,143 @@
+/*
+ * Chuyển động dùng chung (≥ 2 nơi) — chép từ demo 07, design-system mục 8.
+ *
+ * CÁCH GỌI trong CSS module: dùng biến, KHÔNG gọi thẳng tên keyframe
+ * (CSS module tự đổi tên keyframe → không tìm thấy):
+ *     animation: var(--animate-bob);
+ *     animation-duration: 7s;          ← đổi thời lượng / độ trễ bằng thuộc tính lẻ
+ *     animation-delay: var(--dl, 0s);
+ * Trong JSX có thể dùng class Tailwind: animate-bob, animate-blink…
+ * Keyframe chỉ dùng 1 nơi thì viết thẳng trong module của nơi đó.
+ */
+
+@theme static {
+  --animate-bob: bob 5s ease-in-out infinite;
+  --animate-rise: rise 1.4s var(--ease-magic) both;
+  --animate-blink: blink 1s infinite;
+  --animate-bump: bump 0.5s var(--ease-spring);
+  --animate-shake: shake 0.5s;
+  --animate-glow: glow 4s ease-in-out infinite;
+  --animate-breathe: breathe 4s ease-in-out infinite;
+  --animate-flap: flap 1.6s ease-in-out infinite;
+  --animate-swirl: swirl 30s linear infinite;
+  --animate-pulse-orb: pulse-orb 3s ease-in-out infinite;
+  --animate-pop: pop 0.38s var(--ease-spring);
+}
+
+/* Bập bềnh lên xuống (bìa sách, icon tarot, vương miện, cú) */
+@keyframes bob {
+  50% {
+    transform: translateY(-16px);
+  }
+}
+/* Trồi lên + hiện dần */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* Nhấp nháy (chấm trạng thái, skeleton, con trỏ gõ chữ) */
+@keyframes blink {
+  50% {
+    opacity: 0.2;
+  }
+}
+/* Nảy to (badge, tim) */
+@keyframes bump {
+  40% {
+    transform: scale(1.7);
+  }
+}
+/* Lắc (icon giỏ khi sách bay vào) */
+@keyframes shake {
+  25% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
+  75% {
+    transform: rotate(-6deg);
+  }
+}
+/* Phát sáng (logo) */
+@keyframes glow {
+  50% {
+    filter: drop-shadow(0 0 8px var(--color-gold-hi));
+  }
+}
+/* Thở (quầng sáng sau chồng bìa) */
+@keyframes breathe {
+  50% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+}
+/* Dơi vỗ cánh */
+@keyframes flap {
+  50% {
+    transform: scaleY(0.6) translateY(4px);
+  }
+}
+/* Xoay tròn (vòng sigil tác giả) */
+@keyframes swirl {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Quả cầu tím phập phồng (nút chat, quả cầu lúc đang tiên tri) */
+@keyframes pulse-orb {
+  50% {
+    box-shadow:
+      0 0 100px rgba(180, 140, 255, 0.7),
+      inset 0 -20px 50px rgba(0, 0, 0, 0.6);
+  }
+}
+/* Bật lên (toast, panel nhỏ) */
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+}
+
+/* ---------- Hiện dần khi cuộn (hooks/useReveal) ---------- */
+/* Chỉ là trạng thái ẩn ban đầu — JS chạy hiệu ứng bằng element.animate(), không gắn class.
+   Dùng thuộc tính riêng translate / rotate / scale để không đè transform của hover. */
+[data-reveal],
+[data-stagger] > * {
+  opacity: 0;
+  translate: 0 40px;
+  filter: blur(6px);
+}
+/* Kiểu "chia bài": rơi từ trên xuống, xoè góc */
+[data-reveal='deal'],
+[data-stagger='deal'] > * {
+  translate: 0 -120px;
+  scale: 0.7;
+}
+
+/* Hiệu năng (design-system 8.3): khối khuất màn hình tự dừng animation lặp — hooks/usePauseOffscreen */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal],
+  [data-stagger] > * {
+    opacity: 1;
+    translate: none;
+    rotate: none;
+    scale: none;
+    filter: none;
+  }
+}

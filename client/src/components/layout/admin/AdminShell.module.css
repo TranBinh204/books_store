@@ -1,0 +1,235 @@
+/* Khung Admin: sidebar trái + thanh trên. Phẳng, không hiệu ứng nặng (docs/06-ui-ux/admin/00-khung-admin.md) */
+.shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-night);
+}
+
+/* ---------- Sidebar ---------- */
+.aside {
+  position: sticky;
+  top: 0;
+  display: none;
+  height: 100vh;
+  flex: none;
+  border-right: 1px solid rgba(181, 148, 106, 0.22);
+}
+.nav {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-night-2);
+  transition: width 0.2s;
+}
+.brand {
+  display: flex;
+  height: 64px;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.22);
+  white-space: nowrap;
+}
+.collapsed .brand {
+  justify-content: center;
+  padding: 0;
+}
+.brand b {
+  font: 700 26px/1 var(--font-display);
+  color: var(--color-gold-hi);
+}
+.brand small {
+  padding: 2px 8px;
+  border: 1px solid rgba(181, 148, 106, 0.4);
+  border-radius: 3px;
+  font: 600 13px var(--font-heading);
+  letter-spacing: 0.08em;
+  color: var(--color-bone-2);
+  text-transform: uppercase;
+}
+.scroll {
+  flex: 1;
+  overflow: hidden auto;
+  padding: 12px 0;
+}
+.group {
+  margin-bottom: 10px;
+}
+.groupTitle {
+  padding: 4px 20px;
+  font: italic 500 15px var(--font-heading);
+  white-space: nowrap;
+  color: var(--color-bone-2);
+  opacity: 0.8;
+}
+.groupLine {
+  margin: 8px 14px;
+  border-top: 1px solid rgba(181, 148, 106, 0.22);
+}
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1px 8px;
+  padding: 9px 12px;
+  border-radius: 4px;
+  font: 600 18px var(--font-heading);
+  white-space: nowrap;
+  color: var(--color-bone-2);
+  transition: 0.2s;
+}
+.collapsed .item {
+  justify-content: center;
+  padding: 9px 0;
+}
+.item svg {
+  width: 22px;
+  flex: none;
+}
+.item:hover {
+  background: rgba(181, 148, 106, 0.08);
+  color: var(--color-bone);
+}
+/* Mục đang chọn: chữ vàng sáng, nền mờ, vạch vàng 2px bên trái */
+.item[aria-current='page'] {
+  background: rgba(181, 148, 106, 0.12);
+  color: var(--color-gold-hi);
+}
+.item[aria-current='page']::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: -8px;
+  width: 2px;
+  background: var(--color-gold-hi);
+}
+/* Số đơn chờ xử lý: viên thuốc đỏ có quầng sáng nhẹ */
+.pill {
+  min-width: 22px;
+  margin-left: auto;
+  padding: 0 7px;
+  border-radius: 99px;
+  background: var(--color-blood);
+  box-shadow: 0 0 10px rgba(224, 96, 96, 0.55);
+  font: 700 13px/22px var(--font-body);
+  text-align: center;
+  color: #f6dcc8;
+}
+.dot {
+  position: absolute;
+  top: 8px;
+  left: calc(50% + 6px);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #e06060;
+  box-shadow: 0 0 8px rgba(224, 96, 96, 0.7);
+}
+.foot {
+  flex: none;
+  padding: 8px 0 12px;
+  border-top: 1px solid rgba(181, 148, 106, 0.22);
+}
+
+/* ---------- Thanh trên ---------- */
+.main {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  height: 64px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.22);
+  background: rgba(14, 19, 17, 0.92);
+}
+.topbar :global(.ic) {
+  width: 40px;
+  height: 40px;
+}
+.collapseBtn {
+  display: none;
+}
+.collapseBtn svg {
+  transition: rotate 0.2s;
+}
+.collapseBtn[data-collapsed='true'] svg {
+  rotate: 180deg;
+}
+.mobileLogo {
+  font: 700 22px var(--font-display);
+  color: var(--color-gold-hi);
+}
+.right {
+  margin-left: auto;
+}
+.me {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 4px 4px 10px;
+  border-radius: 99px;
+  color: var(--color-bone-2);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.me:hover,
+.me[aria-expanded='true'] {
+  background: rgba(181, 148, 106, 0.1);
+  color: var(--color-gold-hi);
+}
+.meName {
+  display: none;
+  max-width: 200px;
+  overflow: hidden;
+  font: 600 17px var(--font-heading);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.menu {
+  width: 240px;
+  max-width: calc(100vw - 32px);
+  padding-bottom: 6px;
+}
+.content {
+  flex: 1;
+  padding: 16px;
+}
+
+@media (min-width: 640px) {
+  .meName {
+    display: block;
+  }
+}
+@media (min-width: 1180px) {
+  .drawer {
+    display: none;
+  }
+  .aside {
+    display: block;
+  }
+  .burger,
+  .mobileLogo {
+    display: none;
+  }
+  .collapseBtn {
+    display: inline-flex;
+  }
+  .topbar {
+    padding: 0 24px;
+  }
+  .content {
+    padding: 24px;
+  }
+}

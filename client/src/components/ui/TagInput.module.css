@@ -1,0 +1,50 @@
+/* Ô chứa thẻ + ô gõ; thân .field của ui.css, cao theo nội dung */
+.wrap {
+  display: flex;
+  min-height: 48px;
+  height: auto;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+}
+.wrap:focus-within {
+  border-color: var(--color-gold-hi);
+  box-shadow: 0 0 0 3px rgba(226, 196, 143, 0.12);
+}
+.wrap input {
+  min-width: 120px;
+  flex: 1;
+  height: 32px;
+  background: none;
+  border: 0;
+  outline: none;
+  color: var(--color-bone);
+  font: italic 16px var(--font-body);
+}
+.wrap input:disabled {
+  display: none;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px 3px 12px;
+  border: 1px solid var(--color-gold-hi);
+  border-radius: 3px;
+  background: rgba(181, 148, 106, 0.18);
+  font-size: 15px;
+  color: var(--color-gold-hi);
+}
+.tag button {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-bone-2);
+  cursor: pointer;
+}
+.tag button:hover {
+  color: var(--color-ember);
+}

@@ -1,0 +1,17 @@
+/* Nút lên đầu trang — demo 07 (.totop): nút thoi (.diamond) góc trái dưới, hiện khi body.scrolled */
+.totop {
+  --size: 48px;
+  position: fixed;
+  left: 24px;
+  bottom: calc(24px + var(--buybar-h, 0px));
+  z-index: 60;
+  background: var(--color-night);
+  opacity: 0;
+  pointer-events: none;
+  translate: 0 20px;
+}
+:global(body.scrolled) .totop {
+  opacity: 1;
+  pointer-events: auto;
+  translate: none;
+}

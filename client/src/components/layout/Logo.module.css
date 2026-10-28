@@ -1,0 +1,26 @@
+/* Logo — demo 07 (.logo) */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  font: 700 32px/1 var(--font-display);
+  color: var(--color-gold-hi);
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 22px rgba(226, 196, 143, 0.35);
+}
+.logo svg {
+  width: 30px;
+  height: 30px;
+  color: var(--color-gold);
+  animation: var(--animate-glow);
+}
+.plain svg {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .logo {
+    font-size: 26px;
+  }
+}

@@ -1,0 +1,47 @@
+.check {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-bone-2);
+  cursor: pointer;
+}
+.check input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.box {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  place-items: center;
+  border: 1px solid rgba(181, 148, 106, 0.55);
+  border-radius: 3px;
+  transition: 0.25s;
+}
+.box svg {
+  stroke: var(--color-night);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  scale: 0;
+  transition: scale 0.25s var(--ease-magic);
+}
+.check input:checked + .box {
+  border-color: var(--color-gold-hi);
+  background: var(--color-gold-hi);
+}
+.check input:checked + .box svg {
+  scale: 1;
+}
+.check input:focus-visible + .box {
+  outline: 2px solid var(--color-gold-hi);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .box,
+  .box svg {
+    transition: none;
+  }
+}

@@ -1,0 +1,14 @@
+/* Canvas bụi tiên khi bấm chuột — chép từ demo 07 (#dust) */
+.dust {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  overflow: visible;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2147483646;
+}

@@ -1,0 +1,25 @@
+/* Thanh chạy chữ đỏ trên header — demo 07 (.runes) */
+.runes {
+  background: var(--color-blood);
+  color: #f4dccb;
+  font-size: 13.5px;
+  letter-spacing: 0.06em;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.track {
+  display: inline-flex;
+  gap: 40px;
+  padding: 7px 0;
+  animation: marq 40s linear infinite;
+}
+.track span::after {
+  content: '✠';
+  margin-left: 40px;
+  color: var(--color-gold-hi);
+}
+@keyframes marq {
+  to {
+    transform: translateX(-50%);
+  }
+}

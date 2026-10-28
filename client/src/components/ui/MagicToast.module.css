@@ -1,0 +1,46 @@
+/* Toast — demo 07 (.toast, .toast-ic) */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100vw - 32px);
+  padding: 12px 20px 12px 12px;
+  background: var(--color-night-2);
+  border: 1px solid var(--color-gold);
+  color: var(--color-bone);
+  box-shadow: 0 0 30px rgba(226, 196, 143, 0.25);
+  font: 15px/1.4 var(--font-body);
+  animation: var(--animate-pop);
+}
+/* Ô vàng xoay 45° có ngôi sao */
+.ic {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 4px;
+  background: var(--color-gold);
+  color: var(--color-night);
+  transform: rotate(45deg);
+}
+.ic::before {
+  content: '✦';
+  font-size: 14px;
+  transform: rotate(-45deg);
+}
+.error {
+  border-color: var(--color-blood);
+  box-shadow: 0 0 30px rgba(142, 43, 43, 0.35);
+}
+.error .ic {
+  background: var(--color-blood);
+  color: #f6dcc8;
+}
+.error .ic::before {
+  content: '!';
+  font-weight: 700;
+}
+.warning .ic {
+  background: var(--color-ember);
+}
