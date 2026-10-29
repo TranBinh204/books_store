@@ -15,7 +15,8 @@
     "migrate:test": "node-pg-migrate up -d DATABASE_URL_TEST",
     "test:unit": "jest tests/unit",
     "test:integration": "jest --runInBand tests/integration",
-    "create-admin": "tsx scripts/create-admin.ts"
+    "create-admin": "tsx scripts/create-admin.ts",
+    "seed:categories": "tsx scripts/seed-categories.ts"
   },
   "private": true,
   "dependencies": {
