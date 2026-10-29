@@ -62,6 +62,13 @@ const envSchema = z
     UPLOAD_MAX_FILE_MB: z.coerce.number().positive().default(5),
     NEW_BOOK_DAYS: z.coerce.number().int().positive().default(30),
 
+    // Trang chủ Dark Fantasy (docs/06-ui-ux/shop/01-trang-chu.md mục 4)
+    // Sách tạo trong vòng số ngày này → tem "Mới" (A1)
+    // Khối "Truyền thuyết": chỉ chọn sách có ít nhất số đánh giá này (A3)
+    FEATURED_MIN_REVIEWS: z.coerce.number().int().nonnegative().default(8),
+    // GET /api/home giữ kết quả trong bộ nhớ bao nhiêu giây (A8) — 0 = không cache
+    HOME_CACHE_TTL_SECONDS: z.coerce.number().int().nonnegative().default(60),
+
     // Lưu ảnh: local = thư mục server/uploads (phục vụ tại /api/uploads) · cloudinary = Cloudinary
     IMAGE_STORAGE: z.enum(['local', 'cloudinary']).default('local'),
     CLOUDINARY_CLOUD_NAME: z.string().optional(),

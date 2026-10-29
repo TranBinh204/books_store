@@ -23,7 +23,7 @@ const descriptionSchema = z
   .string()
   .trim()
   .max(300, 'Mô tả tối đa 300 ký tự')
-  .transform((value) => value.replace(/\s+/g, ' ') || null)
+  .transform((value) => value.replace(/[ 	]+/g, ' ') || null)
   .nullable();
 
 export const createCategorySchema = z.object({
