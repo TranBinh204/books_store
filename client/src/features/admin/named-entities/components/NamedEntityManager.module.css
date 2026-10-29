@@ -1,0 +1,23 @@
+/* Bảng Tác giả / Nhà xuất bản (docs/06-ui-ux/admin/05-tac-gia.md); khung = `.a-panel` (ui.css) */
+.search {
+  width: 100%;
+  max-width: 384px;
+  margin-bottom: 16px;
+}
+.count {
+  display: inline-block;
+  min-width: 36px;
+  padding: 0 10px;
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  border-radius: 99px;
+  font: 700 14px/24px var(--font-body);
+  text-align: center;
+  color: var(--color-bone-2);
+}
+.countLink {
+  border-color: var(--color-gold);
+  color: var(--color-gold-hi);
+}
+.countLink:hover {
+  background: rgba(181, 148, 106, 0.14);
+}

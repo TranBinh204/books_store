@@ -1,0 +1,91 @@
+/* Cây danh mục Admin (docs/06-ui-ux/admin/04-danh-muc.md); khung = `.a-panel` (ui.css) */
+.tree {
+  padding: 0;
+  overflow: hidden;
+}
+.row {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 16px;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.18);
+  background: var(--color-night-2);
+}
+.row:last-child {
+  border-bottom: 0;
+}
+.child {
+  padding-left: 56px;
+  background: var(--color-night);
+  box-shadow: inset 2px 0 0 rgba(181, 148, 106, 0.35);
+}
+.num {
+  width: 36px;
+  flex: none;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.icon {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  color: var(--color-gold);
+}
+.name {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+.root {
+  font: 700 18px var(--font-heading);
+  color: var(--color-bone);
+}
+.sub {
+  color: var(--color-bone);
+}
+.hidden .root,
+.hidden .sub {
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+.count {
+  width: 88px;
+  flex: none;
+  text-align: right;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.countNarrow {
+  display: none;
+  width: 100%;
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+.empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--color-bone-2);
+}
+
+@media (max-width: 639px) {
+  .row {
+    padding-inline: 10px;
+    gap: 6px;
+  }
+  .child {
+    padding-left: 28px;
+  }
+  .num {
+    width: 28px;
+  }
+  .count {
+    display: none;
+  }
+  .countNarrow {
+    display: block;
+  }
+}
