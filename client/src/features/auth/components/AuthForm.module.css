@@ -1,0 +1,82 @@
+/* Phần biểu mẫu dùng chung của 4 trang tài khoản (bố cục trong AuthShell) */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.form > .btn {
+  width: 100%;
+}
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.aside {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  font-size: 15px;
+}
+.fail {
+  margin: -6px 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: #e0766a;
+}
+.center {
+  text-align: center;
+  color: var(--color-bone-2);
+}
+.wait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0;
+  color: var(--color-bone-2);
+}
+.spin {
+  font-size: 30px;
+  color: var(--color-gold-hi);
+  animation: var(--animate-swirl);
+  animation-duration: 1.6s;
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.actions > .btn {
+  width: 100%;
+}
+.sent {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.sent p {
+  margin: 0;
+  text-align: center;
+  color: var(--color-bone-2);
+}
+.sent strong {
+  color: var(--color-gold-hi);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 520px) {
+  .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spin {
+    animation: none;
+  }
+}
+.email {
+  color: var(--color-gold-hi);
+  overflow-wrap: anywhere;
+}

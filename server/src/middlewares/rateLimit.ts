@@ -44,5 +44,50 @@ export function createLimiter({
 }
 
 
-// Mỗi module tạo limiter riêng khi cần, vd:
-// export const loginLimiter = createLimiter({ windowMinutes: 15, max: 5, onlyCountFailures: true });
+
+// -------- Auth limiters (M01) --------
+// Đăng nhập: chỉ đếm lần SAI — đăng nhập đúng không bị tính
+export const loginLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_LOGIN_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_LOGIN_MAX,
+  onlyCountFailures: true,
+});
+
+export const registerLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_REGISTER_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_REGISTER_MAX,
+});
+
+// Nhập mã OTP đăng ký: chỉ đếm lần SAI (mỗi mã đã có giới hạn số lần sai riêng)
+export const registerVerifyLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_REGISTER_VERIFY_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_REGISTER_VERIFY_MAX,
+  onlyCountFailures: true,
+});
+
+export const registerResendLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_REGISTER_RESEND_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_REGISTER_RESEND_MAX,
+});
+
+export const forgotPasswordLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_FORGOT_PASSWORD_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_FORGOT_PASSWORD_MAX,
+});
+
+export const resetPasswordLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_RESET_PASSWORD_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_RESET_PASSWORD_MAX,
+});
+
+// Đổi mật khẩu: chỉ đếm lần nhập SAI mật khẩu hiện tại (chống dò mật khẩu khi máy bị bỏ quên)
+export const changePasswordLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_CHANGE_PASSWORD_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_CHANGE_PASSWORD_MAX,
+  onlyCountFailures: true,
+});
+
+export const refreshLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_REFRESH_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_REFRESH_MAX,
+});

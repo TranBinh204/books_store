@@ -1,0 +1,62 @@
+# Môi trường phát triển: `docker compose up --build` chạy PostgreSQL, Mailpit, server.
+# Client (Next.js) chạy NGOÀI Docker, ở project client: npm run dev
+name: bookstore
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: bookstore
+      POSTGRES_PASSWORD: bookstore
+      POSTGRES_DB: bookstore
+      TZ: UTC
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U bookstore -d bookstore']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Hộp thư giả cho dev: bắt mọi email server gửi, xem tại http://localhost:8025
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - '8025:8025' # giao diện web
+      - '1025:1025' # SMTP
+
+  server:
+    build:
+      context: .
+      target: dev
+    # Bí mật & thông số (JWT_SECRET, thời hạn token, ...) đặt trong .env
+    # Lần đầu: cp .env.example .env rồi điền giá trị
+    env_file:
+      - path: ./.env
+        required: true
+    # Địa chỉ các dịch vụ trong mạng Docker (ghi đè giá trị trong .env nếu trùng tên)
+    environment:
+      NODE_ENV: development
+      PORT: 8000
+      DATABASE_URL: postgres://bookstore:bookstore@postgres:5432/bookstore
+      DATABASE_URL_TEST: postgres://bookstore:bookstore@postgres:5432/bookstore_test
+      CLIENT_URL: http://localhost:3000
+      # Email (SMTP_*) KHÔNG đặt ở đây → lấy từ .env: Mailpit (mặc định) hoặc Gmail thật
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./:/app
+      - /app/node_modules # giữ node_modules của container, không dùng bản trên Windows
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    # Tự chạy migration mỗi lần khởi động rồi mới bật server
+    command: sh -c "npm run migrate:up && npm run dev"
+
+volumes:
+  pgdata:

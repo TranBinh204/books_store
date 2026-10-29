@@ -1,0 +1,6 @@
+/* Khung hộp thả xuống của icon tài khoản (nội dung dùng .menu-* ở styles/ui.css) */
+.menu {
+  width: 260px;
+  max-width: calc(100vw - 32px);
+  padding-bottom: 6px;
+}

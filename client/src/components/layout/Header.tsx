@@ -1,18 +1,84 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { IconMenu } from '@/components/ui/icons';
+import {
+  IconDesktop,
+  IconLogout,
+  IconMenu,
+  IconPlus,
+  IconUser,
+} from '@/components/ui/icons';
+import { AccountMenu, useCurrentUser, useLogout } from '@/features/auth';
+import { errorMessage } from '@/lib/form';
 import styles from './Header.module.css';
 import { Logo } from './Logo';
 
 /** Menu chính — thêm link khi làm từng module */
 const NAV_LINKS: { href: string; label: string }[] = [{ href: '/', label: 'Trang chủ' }];
 
+/** Mục tài khoản trong drawer mobile (icon tài khoản ở Header bị ẩn ≤ 640px) */
+function DrawerAccount() {
+  const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+  const { data: user, isPending } = useCurrentUser();
+  const logout = useLogout();
+  if (isPending) return null;
+
+  if (!user) {
+    return (
+      <>
+        <p className={styles.drawerTitle}>Tài khoản</p>
+        <Link href="/dang-nhap">
+          <IconUser />
+          Đăng nhập
+        </Link>
+        <Link href="/dang-ky">
+          <IconPlus />
+          Đăng ký
+        </Link>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <p className={styles.drawerTitle}>{user.fullName}</p>
+      <Link href="/tai-khoan">
+        <IconUser />
+        Tài khoản của tôi
+      </Link>
+      {user.role === 'ADMIN' && (
+        <Link href="/admin">
+          <IconDesktop />
+          Trang quản trị
+        </Link>
+      )}
+      <button
+        type="button"
+        disabled={logout.isPending}
+        onClick={() =>
+          logout.mutate(undefined, {
+            onSuccess: () => {
+              enqueueSnackbar('Đã đăng xuất', { variant: 'info' });
+              router.replace('/');
+            },
+            onError: (error) => enqueueSnackbar(errorMessage(error), { variant: 'error' }),
+          })
+        }
+      >
+        <IconLogout />
+        Đăng xuất
+      </button>
+    </>
+  );
+}
+
 /**
- * Header cửa hàng Dark Fantasy (bản khung): burger (≤1180) · logo · menu · vùng icon.
- * Module sau bổ sung: mega menu danh mục, ô tìm kiếm, yêu thích / thông báo / tài khoản / giỏ.
+ * Header cửa hàng Dark Fantasy (bản Module 01 - Auth): burger (≤1180) · logo · menu · tài khoản.
+ * Module sau bổ sung: mega menu danh mục, ô tìm kiếm, yêu thích / thông báo / giỏ hàng.
  * Dính trên đầu trang, cuộn xuống thì trượt lên ẩn (body.scroll-down).
  */
 export function Header() {
@@ -61,7 +127,9 @@ export function Header() {
             ))}
           </nav>
 
-          <div className={styles.icons} />
+          <div className={styles.icons}>
+            <AccountMenu className="ic" />
+          </div>
         </div>
       </header>
 
@@ -78,6 +146,7 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <DrawerAccount />
         </nav>
       </div>
     </>

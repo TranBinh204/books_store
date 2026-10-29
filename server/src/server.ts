@@ -1,11 +1,15 @@
-import type { Server } from 'node:http';
+﻿import type { Server } from 'node:http';
 import { app } from './app';
 import { env } from './config/env';
 import { pool } from './db/pool';
+import { seedDefaultAdmin } from './seeds/admin.seed';
 
 let server: Server | undefined;
 
-function start() {
+async function start() {
+  // Tạo Admin mặc định nếu DB chưa có Admin — lỗi ở bước này không chặn server khởi động
+  await seedDefaultAdmin().catch((err) => console.error('Lỗi khi tạo Admin mặc định:', err));
+
   server = app.listen(env.PORT, () => {
     console.log(`🚀 Server đang chạy tại http://localhost:${env.PORT} (${env.NODE_ENV})`);
   });
@@ -24,4 +28,4 @@ async function shutdown(signal: string) {
 process.on('SIGINT', () => shutdown('SIGINT'));
 process.on('SIGTERM', () => shutdown('SIGTERM'));
 
-start();
+void start();

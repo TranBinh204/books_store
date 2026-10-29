@@ -1,0 +1,80 @@
+# Chạy toàn bộ stack (PostgreSQL, Mailpit, server, client) bằng Docker.
+# Sử dụng: docker compose up --build
+# Xem mail giả: http://localhost:8025
+# Client: http://localhost:3000
+# API:    http://localhost:8000
+name: bookstore-full
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: bookstore
+      POSTGRES_PASSWORD: bookstore
+      POSTGRES_DB: bookstore
+      TZ: UTC
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./server/docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U bookstore -d bookstore']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Hộp thư giả cho dev — xem tại http://localhost:8025
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+
+  server:
+    build:
+      context: ./server
+      target: dev
+    env_file:
+      - path: ./server/.env
+        required: true
+    environment:
+      NODE_ENV: development
+      PORT: 8000
+      DATABASE_URL: postgres://bookstore:bookstore@postgres:5432/bookstore
+      DATABASE_URL_TEST: postgres://bookstore:bookstore@postgres:5432/bookstore_test
+      # Client chạy trong Docker → CORS cho phép origin này
+      CLIENT_URL: http://localhost:3000
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    command: sh -c "npm run migrate:up && npm run dev"
+
+  client:
+    build:
+      context: ./client
+      target: dev
+    environment:
+      # Next.js dùng API_URL này để rewrite /api/* → server nội bộ Docker
+      API_URL: http://server:8000
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      # Windows: Docker Desktop không truyền sự kiện file → dùng polling
+      NEXT_WATCH_POLL_MS: 1000
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - server
+
+volumes:
+  pgdata:

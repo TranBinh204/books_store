@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+out/
+dist/
+build/
+
+# Test
+coverage/
+
+# Environment (chỉ commit .env.example)
+.env
+.env.*
+!.env.example
+# Biến môi trường để copy lên Render / Vercel — chứa bí mật, KHÔNG push
+.env.deploy
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Misc
+*.tsbuildinfo
+next-env.d.ts
+
+# Ảnh upload khi IMAGE_STORAGE=local
+server/uploads/
