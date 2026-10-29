@@ -1,0 +1,30 @@
+/* Dải Flash Sale trên khối giá trang chi tiết sách: gradient lửa → máu như khối "Lời nguyền nửa đêm" */
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #5a1616, var(--color-blood) 55%, #a8501f);
+  color: #ffcf9a;
+}
+.strip p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 14px;
+}
+.strip b {
+  font: 700 16px var(--font-heading);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffb37a;
+}
+.sold {
+  width: 160px;
+}
+.sold > div {
+  margin-top: 0;
+}

@@ -1,0 +1,56 @@
+/* Đếm ngược "Lời nguyền nửa đêm" — demo 07 (.cd, .cd-u) */
+.cd {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 26px 0 50px;
+}
+.unit {
+  text-align: center;
+}
+/* Ô bát giác cắt góc 14px, số phát sáng màu lửa */
+.unit b {
+  display: block;
+  width: 92px;
+  height: 100px;
+  font: 700 58px/100px var(--font-display);
+  color: #ffcf9a;
+  background: linear-gradient(180deg, #2a1414, #170a0a);
+  border: 1px solid rgba(224, 128, 62, 0.45);
+  box-shadow:
+    inset 0 0 30px rgba(224, 128, 62, 0.2),
+    0 0 30px rgba(142, 43, 43, 0.35);
+  text-shadow: 0 0 20px rgba(255, 160, 90, 0.8);
+  clip-path: polygon(
+    14px 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0 calc(100% - 14px),
+    0 14px
+  );
+  font-variant-numeric: tabular-nums;
+  animation: burn 0.6s var(--ease-magic);
+}
+@keyframes burn {
+  0% {
+    filter: brightness(2.2) blur(2px);
+    transform: scale(1.08);
+  }
+}
+.unit small {
+  display: block;
+  margin-top: 8px;
+  font: italic 15px var(--font-heading);
+  color: var(--color-gold);
+}
+@media (max-width: 640px) {
+  .unit b {
+    width: 70px;
+    height: 80px;
+    font-size: 44px;
+    line-height: 80px;
+  }
+}

@@ -1,0 +1,61 @@
+/* Phần chung của khối tiên tri (trang chủ + /goi-y-sach) — demo 07 (.o-status, .o-tags, .o-skel) */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 18px;
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+.status i {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #b48cff;
+  box-shadow: 0 0 10px #b48cff;
+  animation: var(--animate-blink);
+}
+.done i {
+  animation: none;
+  background: var(--color-gold-hi);
+  box-shadow: 0 0 10px var(--color-gold-hi);
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.tags span {
+  padding: 2px 12px;
+  border: 1px solid rgba(180, 140, 255, 0.45);
+  border-radius: 2px;
+  color: #d3c2ff;
+  font-size: 14px;
+}
+.skel {
+  border: 1px dashed rgba(180, 140, 255, 0.35);
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(180, 140, 255, 0.05) 0 10px,
+    transparent 10px 20px
+  );
+}
+.blinking .skel {
+  animation: var(--animate-blink);
+  animation-duration: 1.4s;
+}
+
+.oracle {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 50px;
+  align-items: center;
+}
+@media (max-width: 1180px) {
+  .oracle {
+    grid-template-columns: 1fr;
+  }
+}

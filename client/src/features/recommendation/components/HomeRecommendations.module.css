@@ -1,0 +1,20 @@
+/* Khối "Quả cầu tiên tri" — demo 07 (.oracle, .o-status, .o-tags, .o-grid, .o-skel) */
+.action {
+  margin-bottom: 24px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  min-height: 380px;
+}
+.more {
+  margin-top: 26px;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

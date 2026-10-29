@@ -1,0 +1,74 @@
+/* Thanh trượt ngang — demo 07 (.slider .track .ctrls .nb .pbar) */
+.slider {
+  position: relative;
+}
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 4 * 20px) / 5);
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* chừa chỗ cho thẻ nhấc lên khi hover */
+  padding: 14px 4px 20px;
+  margin: -14px -4px 0;
+}
+.track::-webkit-scrollbar {
+  display: none;
+}
+.track > * {
+  scroll-snap-align: start;
+}
+.track[data-dragging] {
+  scroll-snap-type: none;
+  cursor: grabbing;
+}
+.track[data-dragging] * {
+  pointer-events: none;
+}
+
+.ctrls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 26px;
+}
+.nb {
+  --size: 50px;
+}
+.nb span {
+  font-size: 20px;
+}
+/* Thanh tiến độ có ngôi sao chạy theo --progress */
+.pbar {
+  position: relative;
+  width: 200px;
+  height: 2px;
+  background: rgba(181, 148, 106, 0.2);
+}
+.pbar::after {
+  content: '✦';
+  position: absolute;
+  top: -9px;
+  left: calc(var(--progress, 0) * 100%);
+  transform: translateX(-50%);
+  color: var(--color-gold-hi);
+  font-size: 14px;
+  text-shadow: 0 0 10px var(--color-gold-hi);
+  transition: left 0.3s;
+}
+
+@media (max-width: 1180px) {
+  .track {
+    grid-auto-columns: calc((100% - 3 * 18px) / 4);
+    gap: 18px;
+  }
+}
+@media (max-width: 640px) {
+  .track {
+    grid-auto-columns: 64%;
+    gap: 14px;
+  }
+}

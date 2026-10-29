@@ -1,0 +1,50 @@
+/* Dòng sách nhỏ — demo 07 (.sl bảng xếp hạng, .cb trong chat) */
+.row {
+  display: grid;
+  grid-template-columns: var(--cv, 42px) 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 10px 6px;
+  border-radius: 4px;
+  transition:
+    background 0.3s,
+    padding 0.4s var(--ease-magic);
+}
+.row:hover {
+  background: rgba(181, 148, 106, 0.08);
+}
+.cv {
+  position: relative;
+  width: var(--cv, 42px);
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-spring);
+}
+.row:hover .cv {
+  transform: rotate(-8deg) scale(1.15);
+}
+.row b {
+  display: block;
+  font: 700 17px/1.2 var(--font-heading);
+}
+.row small {
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+.price {
+  font: 700 17px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+/* Nhỏ gọn (chat, ô gợi ý) */
+.compact {
+  --cv: 32px;
+  gap: 10px;
+  padding: 5px;
+  background: rgba(14, 19, 17, 0.6);
+}
+.compact:hover {
+  background: rgba(181, 148, 106, 0.15);
+}
+.compact b {
+  font-size: 15px;
+}

@@ -1,0 +1,56 @@
+/* Nút tim trên bìa thẻ sách — demo 07 (.wish). Thẻ cha hiện nút khi hover qua [data-wish] */
+.wish {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(14, 19, 17, 0.7);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: 0.35s var(--ease-spring);
+}
+.wish[aria-pressed='true'],
+.wish:focus-visible {
+  opacity: 1;
+  transform: none;
+}
+.wish svg {
+  width: 17px;
+  fill: none;
+  stroke: var(--color-gold-hi);
+  stroke-width: 2;
+}
+.wish[aria-pressed='true'] svg {
+  fill: var(--color-blood);
+  stroke: #e06060;
+  animation: var(--animate-bump);
+  animation-duration: 0.45s;
+}
+/* Màn cảm ứng không có hover → luôn hiện */
+@media (hover: none) {
+  .wish {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Nút "Yêu thích" ở trang chi tiết sách (dùng cùng .btn .btn-ghost) */
+.big svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+.big[aria-pressed='true'] {
+  color: #e06060;
+  border-color: var(--color-blood);
+}
+.big[aria-pressed='true'] svg {
+  fill: var(--color-blood);
+  stroke: #e06060;
+}

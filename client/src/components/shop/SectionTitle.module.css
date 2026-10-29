@@ -1,0 +1,35 @@
+/* Tiêu đề khối — demo 07 (.sec-hd) */
+.hd {
+  margin-bottom: 52px;
+  text-align: center;
+}
+.hd h2 {
+  margin-top: 12px;
+  font: 700 clamp(40px, 5.4vw, 72px) / 1 var(--font-display);
+  color: var(--color-bone);
+}
+/* Phần nhấn: bọc <em> trong title */
+.hd h2 em {
+  font-style: normal;
+  color: var(--color-gold-hi);
+  text-shadow: 0 0 24px rgba(226, 196, 143, 0.35);
+}
+.curse h2 em {
+  color: #ff9b6a;
+  text-shadow: 0 0 30px rgba(224, 128, 62, 0.6);
+}
+.hd p {
+  margin-top: 10px;
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+.action {
+  margin-top: 18px;
+}
+/* Cỡ nhỏ cho trang chức năng (giỏ hàng, tài khoản…) */
+.compact {
+  margin-bottom: 32px;
+}
+.compact h2 {
+  font-size: clamp(32px, 4vw, 48px);
+}

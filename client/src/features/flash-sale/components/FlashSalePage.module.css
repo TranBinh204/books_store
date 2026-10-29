@@ -1,0 +1,46 @@
+/* Trang /flash-sale — nền ở ui.css (.curse-bg), nến / đếm ngược / thẻ đỏ dùng chung với trang chủ */
+.page {
+  padding: 56px 0 40px;
+  margin-bottom: 60px;
+}
+/* Đếm ngược có margin dưới 50px: kéo dòng đếm tác phẩm sát lên */
+.count {
+  margin: -30px 0 40px;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+.count b {
+  font: 700 22px var(--font-heading);
+  font-style: normal;
+  color: #ff9b6a;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px;
+}
+.back {
+  margin-top: 40px;
+  text-align: center;
+}
+
+@media (max-width: 1180px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .page {
+    padding-top: 40px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}

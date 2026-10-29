@@ -1,0 +1,56 @@
+/* Ô mã giảm giá trên phiếu giấy da (chữ --ink) */
+.box {
+  margin: 12px 0;
+  padding: 14px 0;
+  border-block: 1px dashed rgba(42, 29, 16, 0.4);
+}
+.row {
+  display: flex;
+  gap: 8px;
+}
+.input.input {
+  height: 44px;
+  font-size: 16px;
+  font-style: normal;
+  text-transform: uppercase;
+}
+.input::placeholder {
+  text-transform: none;
+}
+.row :global(.btn) {
+  flex: none;
+  padding: 0 18px;
+}
+.error {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--color-blood);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 6px 3px 12px;
+  border: 1px solid var(--color-blood);
+  border-radius: 3px;
+  font: 700 15px var(--font-heading);
+  letter-spacing: 0.04em;
+  color: var(--color-blood);
+}
+.chip button {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 11px;
+  color: inherit;
+  cursor: pointer;
+}
+.chip button:hover {
+  background: rgba(142, 43, 43, 0.15);
+}
+.ok {
+  margin: 8px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-moss);
+}

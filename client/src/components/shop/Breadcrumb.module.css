@@ -1,0 +1,39 @@
+/* Đường dẫn: Trang chủ ✦ Danh mục ✦ Trang hiện tại */
+.crumbs {
+  padding: 18px 0 10px;
+  font: 15px var(--font-body);
+  color: var(--color-bone-2);
+}
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+}
+.crumbs li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.crumbs li + li::before {
+  content: '✦';
+  font-size: 9px;
+  color: var(--color-gold);
+}
+.crumbs a {
+  transition:
+    color 0.3s,
+    text-shadow 0.3s;
+}
+.crumbs a:hover {
+  color: var(--color-gold-hi);
+  text-shadow: 0 0 12px rgba(226, 196, 143, 0.5);
+}
+.current {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  color: var(--color-gold-hi);
+}

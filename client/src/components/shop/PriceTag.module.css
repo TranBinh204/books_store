@@ -1,0 +1,47 @@
+/* Giá — demo 07 (.price trên thẻ, .lg-price trên giấy da) */
+.card b {
+  display: block;
+  font: 700 21px/1 var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.card s {
+  font-size: 13px;
+  color: #7f877f;
+}
+.curse b {
+  color: #ffb37a;
+}
+
+.parchment {
+  font: 700 28px var(--font-heading);
+  color: var(--color-blood);
+}
+.parchment s {
+  margin-left: 8px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #6b5a47;
+}
+
+/* Trang chi tiết sách (nền tối) */
+.detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+}
+.detail b {
+  font: 700 38px/1 var(--font-heading);
+  color: var(--color-gold-hi);
+  text-shadow: 0 0 24px rgba(226, 196, 143, 0.35);
+}
+.detail s {
+  font-size: 18px;
+  color: #7f877f;
+}
+.off {
+  padding: 2px 10px;
+  background: var(--color-blood);
+  color: #f6dcc8;
+  font: 700 14px var(--font-heading);
+}

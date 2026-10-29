@@ -1,0 +1,19 @@
+/* Trạng thái rỗng của trang danh sách / giỏ hàng: icon mờ + câu + 1 nút */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 64px 24px;
+  text-align: center;
+}
+.empty svg {
+  width: 72px;
+  height: 72px;
+  color: var(--color-gold);
+  opacity: 0.4;
+}
+.empty p {
+  font: 600 22px var(--font-heading);
+  color: var(--color-bone);
+}

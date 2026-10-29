@@ -1,0 +1,38 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.stars {
+  display: flex;
+}
+.stars button {
+  padding: 2px;
+  color: rgba(181, 148, 106, 0.55);
+  cursor: pointer;
+  transition:
+    transform 0.2s var(--ease-magic),
+    color 0.25s;
+}
+.stars button[data-on='true'] {
+  color: var(--color-gold-hi);
+  filter: drop-shadow(0 0 6px rgba(226, 196, 143, 0.5));
+}
+.stars button:hover {
+  transform: scale(1.12);
+}
+.stars button:focus-visible {
+  outline: 2px solid var(--color-gold-hi);
+  border-radius: 4px;
+}
+.label {
+  height: 22px;
+  font: italic 600 16px var(--font-heading);
+  color: var(--color-gold);
+}
+@media (prefers-reduced-motion: reduce) {
+  .stars button {
+    transition: none;
+  }
+}

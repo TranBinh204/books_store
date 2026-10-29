@@ -1,0 +1,48 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.book {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.cover {
+  position: relative;
+  width: 48px;
+  aspect-ratio: 2 / 3;
+  flex: none;
+  overflow: hidden;
+  border: 1px solid rgba(181, 148, 106, 0.4);
+  border-radius: 3px;
+}
+.name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font: 600 18px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.pick {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font: italic 600 15px var(--font-heading);
+  color: var(--color-gold);
+}
+.fail {
+  margin: 0;
+  color: #e0766a;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+@media (max-width: 520px) {
+  .actions > .btn {
+    flex: 1;
+  }
+}

@@ -1,0 +1,54 @@
+/* 3 ngọn nến lay — demo 07 (.candles, .candle). Dùng ở trang chủ và trang /flash-sale */
+.candles {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 8px;
+}
+.candle {
+  position: relative;
+  width: 14px;
+  height: 40px;
+  background: linear-gradient(90deg, #d8c8a8, #f3e7cd, #c9b48d);
+  border-radius: 3px;
+}
+/* Ngọn lửa lay */
+.candle::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 12px;
+  height: 24px;
+  margin-left: -6px;
+  background: radial-gradient(
+    ellipse at 50% 80%,
+    #fff6c8,
+    #ffb84d 40%,
+    #e0603e 70%,
+    transparent 72%
+  );
+  border-radius: 50% 50% 35% 35% / 65% 65% 35% 35%;
+  filter: drop-shadow(0 0 10px #ffa94d);
+  transform-origin: 50% 100%;
+  animation: flicker 0.25s infinite alternate;
+}
+@keyframes flicker {
+  from {
+    transform: scaleY(1) skewX(-2deg);
+  }
+  to {
+    transform: scaleY(1.15) skewX(3deg);
+    opacity: 0.9;
+  }
+}
+@media (max-width: 640px) {
+  .candles {
+    gap: 36px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .candle::before {
+    animation: none;
+  }
+}

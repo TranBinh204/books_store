@@ -1,0 +1,11 @@
+/* Flash Sale "Lời nguyền nửa đêm" trang chủ — nền ở ui.css (.curse-bg) */
+.curse {
+  position: relative;
+  margin-top: 110px;
+  padding: 100px 0;
+  overflow: hidden;
+}
+.all {
+  margin-top: 30px;
+  text-align: center;
+}

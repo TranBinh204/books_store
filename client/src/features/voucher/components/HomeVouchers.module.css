@@ -1,0 +1,18 @@
+/* Lưới cuộn bùa — demo 07 (.scrolls) */
+.scrolls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
+  padding-inline: 12px;
+}
+@media (max-width: 1180px) {
+  .scrolls {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 36px;
+  }
+}
+@media (max-width: 640px) {
+  .scrolls {
+    grid-template-columns: 1fr;
+  }
+}

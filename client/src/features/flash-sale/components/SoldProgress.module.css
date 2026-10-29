@@ -1,0 +1,29 @@
+/* Thanh "đã bán" Flash Sale — demo 07 (.souls) */
+.souls {
+  margin-top: 10px;
+}
+.bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.bar i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #8e2b2b, #e0803e, #ffd08a);
+  box-shadow: 0 0 12px #e0803e;
+  transition: width 1.8s var(--ease-magic) 0.2s;
+}
+/* Cuộn tới → chạy từ 0 lên đúng % (data-filled do React gắn) */
+.bar[data-filled] i {
+  width: var(--w);
+}
+.souls small {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 12.5px;
+  color: var(--color-bone-2);
+}

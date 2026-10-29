@@ -1,0 +1,91 @@
+/* Thư mời: giấy da + cú + dấu sáp — demo 07 (.letter, .owl-bird, .wax-seal) */
+.paper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.content {
+  overflow: hidden;
+  padding: 70px 80px;
+  text-align: center;
+}
+.owl {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  color: var(--color-night);
+  animation: var(--animate-bob);
+  animation-duration: 4s;
+}
+/* Gửi xong: cú bay đi */
+.ok .owl {
+  animation: flyAway 1.6s var(--ease-magic) forwards;
+}
+@keyframes flyAway {
+  30% {
+    transform: translate(-20px, 10px) rotate(-10deg);
+  }
+  100% {
+    transform: translate(600px, -300px) rotate(20deg) scale(0.4);
+    opacity: 0;
+  }
+}
+.content h2 {
+  margin-top: 8px;
+  font: 700 clamp(36px, 4.6vw, 52px) / 1.05 var(--font-display);
+}
+.content p {
+  margin-top: 10px;
+  color: #33271b;
+}
+.form {
+  display: flex;
+  gap: 12px;
+  max-width: 520px;
+  margin: 26px auto 0;
+}
+.form input {
+  flex: 1;
+}
+.error {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--color-blood);
+}
+.okMsg {
+  margin-top: 26px !important;
+  font: italic 600 22px var(--font-heading);
+  color: var(--color-blood) !important;
+  animation: var(--animate-rise);
+  animation-duration: 0.8s;
+}
+.seal {
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  margin: 26px auto 0;
+  border-radius: 50%;
+  font: 700 30px var(--font-display);
+  color: #f3d9c2;
+  background: radial-gradient(circle at 35% 30%, #b14141, #6d1d1d 70%);
+  box-shadow:
+    0 4px 0 #4b1212,
+    0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.5s var(--ease-spring);
+}
+.seal:hover {
+  transform: rotate(-12deg) scale(1.08);
+}
+@media (max-width: 900px) {
+  .content {
+    padding: 56px 28px;
+  }
+}
+@media (max-width: 640px) {
+  .form {
+    flex-direction: column;
+  }
+  .form input {
+    flex: none;
+  }
+}

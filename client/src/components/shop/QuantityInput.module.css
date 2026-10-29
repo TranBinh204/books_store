@@ -1,0 +1,50 @@
+/* Ô số lượng − n + : viền vàng mờ, nền tối (trang chi tiết sách, giỏ hàng) */
+.qty {
+  --h: 42px;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  border: 1px solid rgba(181, 148, 106, 0.4);
+  border-radius: 4px;
+  background: var(--color-night-2);
+  color: var(--color-bone);
+  transition: border-color 0.25s;
+}
+.qty:focus-within,
+.qty:hover {
+  border-color: var(--color-gold-hi);
+}
+.qty[data-disabled='true'] {
+  opacity: 0.6;
+}
+.sm {
+  --h: 32px;
+}
+.qty button {
+  width: var(--h);
+  height: var(--h);
+  font: 400 20px/1 var(--font-heading);
+  color: var(--color-gold-hi);
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.qty button:hover:not(:disabled) {
+  background: rgba(181, 148, 106, 0.15);
+}
+.qty button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+.qty input {
+  width: calc(var(--h) * 1.35);
+  height: var(--h);
+  border-inline: 1px solid rgba(181, 148, 106, 0.25);
+  background: none;
+  color: inherit;
+  text-align: center;
+  outline: none;
+  appearance: textfield;
+}
+.qty input::-webkit-inner-spin-button {
+  appearance: none;
+}
