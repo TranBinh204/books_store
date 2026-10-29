@@ -1,0 +1,122 @@
+/* Danh sách sách Admin (docs/06-ui-ux/admin/02-sach.md); khung = `.a-panel`, tag = AdminTag, ảnh bìa = `.a-cover` (ui.css) */
+.toolbar {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.search {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+.select {
+  width: 200px;
+}
+.statusGroup {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.moreBtn {
+  margin-left: auto;
+}
+.advanced {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(181, 148, 106, 0.18);
+}
+.price {
+  width: 160px;
+}
+.scope {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Ô "Sách": tên + tác giả (+ tag trạng thái chỉ hiện ở màn hẹp) */
+.titleCell {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1.25;
+}
+.title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-weight: 600;
+  color: var(--color-bone);
+}
+.title:hover {
+  color: var(--color-gold-hi);
+}
+.author {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.narrowOnly {
+  display: none;
+}
+.priceCell {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.25;
+}
+.sale {
+  font-weight: 700;
+  color: var(--color-gold-hi);
+}
+.was {
+  font-size: 13px;
+  text-decoration: line-through;
+  color: var(--color-bone-2);
+}
+.off {
+  margin-left: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-ember);
+}
+.stockCell {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 8px;
+}
+.stockNum {
+  min-width: 28px;
+  text-align: right;
+  font-weight: 700;
+  color: var(--color-bone);
+}
+
+@media (max-width: 899px) {
+  .narrowOnly {
+    display: block;
+    margin-top: 2px;
+  }
+  .select {
+    width: 100%;
+  }
+  .moreBtn {
+    margin-left: 0;
+  }
+}

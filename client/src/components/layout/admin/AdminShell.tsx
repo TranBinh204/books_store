@@ -4,7 +4,17 @@ import { Drawer, Tooltip } from '@mui/material';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, type ComponentType, type ReactNode, type SVGProps } from 'react';
-import { IconCollapse, IconDashboard, IconMenu, IconStore } from '@/components/ui/icons';
+import {
+  IconBook,
+  IconBuilding,
+  IconCategory,
+  IconCollapse,
+  IconDashboard,
+  IconInventory,
+  IconMenu,
+  IconStore,
+  IconUser,
+} from '@/components/ui/icons';
 import styles from './AdminShell.module.css';
 
 interface NavItem {
@@ -18,6 +28,16 @@ const NAV_GROUPS: { title: string; items: NavItem[] }[] = [
   {
     title: 'Tổng quan',
     items: [{ href: '/admin', label: 'Tổng quan', icon: IconDashboard }],
+  },
+  {
+    title: 'Sản phẩm',
+    items: [
+      { href: '/admin/sach', label: 'Sách', icon: IconBook },
+      { href: '/admin/danh-muc', label: 'Danh mục', icon: IconCategory },
+      { href: '/admin/tac-gia', label: 'Tác giả', icon: IconUser },
+      { href: '/admin/nha-xuat-ban', label: 'Nhà xuất bản', icon: IconBuilding },
+      { href: '/admin/ton-kho', label: 'Lịch sử tồn kho', icon: IconInventory },
+    ],
   },
 ];
 

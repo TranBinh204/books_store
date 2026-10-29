@@ -1,0 +1,43 @@
+/* 2 thẻ số Sắp hết / Hết hàng ở trang Tồn kho (docs/06-ui-ux/admin/07-ton-kho.md Q1) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.card {
+  min-height: 118px;
+  gap: 2px;
+  color: inherit;
+  transition: border-color 0.2s;
+}
+.card:hover {
+  border-color: var(--color-gold-hi);
+}
+.label {
+  font: 600 17px var(--font-heading);
+  color: var(--color-bone-2);
+}
+.value {
+  font: 700 34px/1.15 var(--font-heading);
+}
+.low {
+  color: var(--color-ember);
+}
+.out {
+  color: #e06060;
+}
+.go {
+  margin-top: auto;
+  font-size: 14px;
+  color: var(--color-gold);
+}
+.card:hover .go {
+  color: var(--color-gold-hi);
+}
+
+@media (max-width: 399px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

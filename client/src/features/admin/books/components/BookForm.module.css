@@ -1,0 +1,59 @@
+/* Form sách Admin (docs/06-ui-ux/admin/03-sach-form.md); khung khối = `.a-panel` (ui.css) */
+.grid {
+  display: grid;
+  gap: 20px;
+}
+.col {
+  /* 1 cột: các khối xếp thẳng theo `order` bên dưới */
+  display: contents;
+}
+.section h2 {
+  margin-bottom: 16px;
+  font: 700 20px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pair {
+  display: grid;
+  gap: 16px;
+}
+/* Tablet/mobile (1 cột): ảnh lên ngay sau Thông tin sách, mô tả xuống cuối (Q2) */
+.info {
+  order: 1;
+}
+.media {
+  order: 2;
+}
+.desc {
+  order: 4;
+}
+.side {
+  order: 3;
+}
+
+@media (min-width: 640px) {
+  .pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1280px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) 420px;
+  }
+  .col {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .info,
+  .media,
+  .desc,
+  .side {
+    order: 0;
+  }
+}

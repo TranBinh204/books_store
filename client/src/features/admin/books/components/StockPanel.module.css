@@ -1,0 +1,48 @@
+/* Khối Tồn kho ở trang sửa sách (docs/06-ui-ux/admin/03-sach-form.md); khung = `.a-panel` */
+.wrap {
+  margin-top: 32px;
+}
+.summary {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 20px;
+}
+.label {
+  font: 600 17px var(--font-heading);
+  color: var(--color-bone-2);
+}
+.number {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.number b {
+  font: 700 34px/1.15 var(--font-heading);
+  color: var(--color-bone);
+}
+.sold {
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+.heading {
+  margin-bottom: 8px;
+  font: 700 20px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+
+@media (max-width: 479px) {
+  .actions {
+    width: 100%;
+  }
+  .actions > * {
+    flex: 1;
+  }
+}

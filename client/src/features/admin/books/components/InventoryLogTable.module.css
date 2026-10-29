@@ -1,0 +1,52 @@
+/* Bảng lịch sử tồn kho (docs/06-ui-ux/admin/07-ton-kho.md); khung = `.a-panel`, tag = AdminTag */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.search {
+  width: 288px;
+  max-width: 100%;
+}
+.reason {
+  width: 176px;
+}
+.book {
+  color: var(--color-gold-hi);
+}
+.book:hover {
+  text-decoration: underline;
+}
+.bookCell {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.25;
+}
+.note {
+  display: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+.delta {
+  font-weight: 700;
+}
+
+@media (max-width: 899px) {
+  .note {
+    display: block;
+  }
+  .reason {
+    width: 100%;
+  }
+  .search {
+    width: 100%;
+  }
+}
