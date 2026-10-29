@@ -1,0 +1,34 @@
+/* Tác giả: hội pháp sư — demo 07 (.mages, .mage, .sigil) */
+.mages {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+.mage {
+  display: block;
+  text-align: center;
+}
+/* Cỡ + khoảng cách của huy hiệu trong lưới; hình vẽ ở MageSigil */
+.sigil {
+  margin: 0 auto 14px;
+}
+.mage b {
+  display: block;
+  font: 700 19px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.mage small {
+  font-size: 13.5px;
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+@media (max-width: 1180px) {
+  .mages {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .mages {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

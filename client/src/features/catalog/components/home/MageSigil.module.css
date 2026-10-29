@@ -1,0 +1,42 @@
+/* Huy hiệu tác giả: vòng ấn chú xoay + chữ viết tắt — demo 07 (.sigil). Dùng ở trang chủ và trang tìm theo tác giả */
+.sigil {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--sigil-size, 150px);
+  max-width: 100%;
+  aspect-ratio: 1;
+}
+.sigil svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--color-gold);
+  opacity: 0.55;
+  animation: var(--animate-swirl);
+  transition: opacity 0.4s;
+}
+/* Rê chuột lên huy hiệu, hoặc lên khối cha có class `sigil-host` */
+.sigil:hover svg,
+:global(.sigil-host):hover .sigil svg {
+  opacity: 1;
+  animation-duration: 6s;
+  filter: drop-shadow(0 0 6px var(--color-gold-hi));
+}
+.sigil span {
+  display: grid;
+  place-items: center;
+  width: 64%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  font: 700 calc(var(--sigil-size, 150px) * 0.253) var(--font-display);
+  color: var(--color-night);
+  background: radial-gradient(circle at 35% 30%, hsl(var(--h) 50% 75%), hsl(var(--h) 40% 45%));
+  box-shadow: 0 0 30px hsl(var(--h) 60% 50% / 0.4);
+  transition: transform 0.5s var(--ease-spring);
+}
+.sigil:hover span,
+:global(.sigil-host):hover .sigil span {
+  transform: scale(1.1);
+}

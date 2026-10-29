@@ -1,0 +1,32 @@
+/* Giới thiệu trên giấy da — demo 07 (.intro) */
+.intro {
+  padding-top: 40px;
+}
+.paper {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.content {
+  padding: 80px 90px;
+  text-align: center;
+}
+.content h2 {
+  font: 700 clamp(36px, 4.4vw, 56px) / 1.05 var(--font-display);
+  color: var(--color-night);
+}
+.content p {
+  margin-top: 18px;
+  font-size: 19px;
+  color: #2a2017;
+}
+.content em {
+  display: block;
+  margin-top: 20px;
+  font: italic 500 22px var(--font-heading);
+  color: #5a3d22;
+}
+@media (max-width: 900px) {
+  .content {
+    padding: 56px 28px;
+  }
+}

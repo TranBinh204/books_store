@@ -1,0 +1,48 @@
+/* Trích dẫn trên giấy da — demo 07 (.quote, .tw-caret) */
+.quote {
+  max-width: 900px;
+  margin: 0 auto;
+  transform-origin: top;
+}
+/* Mở cuộn khi cuộn tới */
+.unroll {
+  animation: unroll 1.4s var(--ease-magic);
+}
+@keyframes unroll {
+  from {
+    transform: scaleY(0.05);
+  }
+}
+.content {
+  padding: 70px 80px;
+  text-align: center;
+}
+.content p {
+  min-height: 3.9em;
+  font: italic 500 clamp(24px, 2.8vw, 36px) / 1.3 var(--font-heading);
+}
+.content cite {
+  display: block;
+  min-height: 1.6em;
+  margin-top: 18px;
+  font: 600 16px var(--font-heading);
+  font-style: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-blood);
+}
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  vertical-align: -3px;
+  background: var(--color-ink);
+  animation: var(--animate-blink);
+  animation-duration: 0.8s;
+  animation-timing-function: steps(1);
+}
+@media (max-width: 900px) {
+  .content {
+    padding: 56px 28px;
+  }
+}

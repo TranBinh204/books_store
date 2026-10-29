@@ -1,0 +1,71 @@
+/* Banner khuyến mãi — demo 07 (.promos, .promo) */
+.promos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+.promo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 340px;
+  padding: 44px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--color-moss);
+  border: 1px solid rgba(181, 148, 106, 0.4);
+}
+.promo img {
+  z-index: -2;
+  object-fit: cover;
+  filter: sepia(0.5) saturate(0.8) brightness(0.55);
+  transition:
+    transform 1.4s var(--ease-magic),
+    filter 0.8s;
+}
+.promo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(14, 19, 17, 0.95) 25%, transparent);
+}
+/* Khung viền vàng bên trong, hover thì thu vào */
+.promo::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(226, 196, 143, 0.35);
+  pointer-events: none;
+  transition: inset 0.5s var(--ease-magic);
+}
+.promo:hover::after {
+  inset: 20px;
+}
+.promo:hover img {
+  transform: scale(1.08);
+  filter: sepia(0.3) saturate(1) brightness(0.65);
+}
+.promo small {
+  font: italic 600 16px var(--font-heading);
+  color: var(--color-gold);
+  letter-spacing: 0.1em;
+}
+.promo h3 {
+  max-width: 380px;
+  margin: 10px 0 20px;
+  font: 700 clamp(34px, 3.4vw, 50px) / 1 var(--font-display);
+}
+.promo h3 em {
+  font-style: normal;
+  color: var(--color-gold-hi);
+}
+.promo :global(.more) {
+  align-self: flex-start;
+}
+@media (max-width: 900px) {
+  .promos {
+    grid-template-columns: 1fr;
+  }
+}

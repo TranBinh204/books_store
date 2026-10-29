@@ -1,11 +1,11 @@
-import { HealthCheckCard } from '@/features/system';
+import { Suspense } from 'react';
+import { HomeContent, HomeSkeleton } from '@/features/catalog';
 
-/** Trang chủ tạm của khung: kiểm tra client → /api (rewrite) → server → PostgreSQL */
+// Trang chủ: khung giữ chỗ hiện ngay, nội dung (lấy dữ liệu ở server) đổ vào khi xong
 export default function HomePage() {
   return (
-    <section className="wrap flex flex-1 flex-col items-center justify-center gap-6 py-16">
-      <h1>BookStore</h1>
-      <HealthCheckCard />
-    </section>
+    <Suspense fallback={<HomeSkeleton />}>
+      <HomeContent />
+    </Suspense>
   );
 }

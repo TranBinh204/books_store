@@ -1,0 +1,413 @@
+/* Khung chung của trang danh mục / tìm kiếm: 2 cột, thanh công cụ, lưới sách, "Xem thêm", trạng thái rỗng */
+.body {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+  margin-top: 26px;
+}
+.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+.aside {
+  position: sticky;
+  top: 100px;
+}
+.main {
+  min-width: 0;
+}
+
+/* ---------- Thanh công cụ ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  margin-bottom: 16px;
+}
+.count {
+  font: italic 16px var(--font-body);
+  color: var(--color-bone-2);
+}
+.count b {
+  font: 700 20px var(--font-heading);
+  font-style: normal;
+  color: var(--color-gold-hi);
+}
+.spin {
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--color-gold-hi);
+  animation: var(--animate-swirl);
+  animation-duration: 1s;
+}
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.filterBtn {
+  display: none;
+  position: relative;
+}
+.filterCount {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--color-blood);
+  color: #fff;
+  font: 700 12px var(--font-body);
+  box-shadow: 0 0 10px rgba(142, 43, 43, 0.8);
+}
+
+/* ---------- Hàng chip: khoảng giá (tìm kiếm) · bộ lọc đang áp (danh mục) — chip là .chip chip-soft ở ui.css ---------- */
+.chips {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 2px 2px 6px;
+}
+.chipX {
+  margin-left: 8px;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--color-gold);
+}
+
+/* ---------- Lưới sách ---------- */
+.dim {
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+.grid5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.cell {
+  min-width: 0;
+}
+
+/* ---------- Xem thêm ---------- */
+.more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 44px;
+  text-align: center;
+}
+.more small {
+  font: italic 15px var(--font-body);
+  color: var(--color-bone-2);
+}
+.end {
+  margin-top: 44px;
+  text-align: center;
+  font: italic 17px var(--font-body);
+  color: var(--color-gold);
+}
+
+/* ---------- Rỗng ---------- */
+@media (max-width: 1180px) {
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .aside {
+    display: none;
+  }
+  .filterBtn {
+    display: inline-flex;
+  }
+  .grid5 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .grid,
+  .grid5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .body {
+    margin-top: 18px;
+  }
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .tools {
+    width: 100%;
+  }
+  .grid,
+  .grid5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+/* ========== Cột lọc (FilterPanel): ô chọn là thoi xoay 45° viền vàng, vẽ lại từ input gốc ========== */
+.filterPanel {
+  padding: 20px 22px 12px;
+}
+.filterHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.filterHead h2 {
+  font: 700 22px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.filterClear {
+  font: italic 15px var(--font-body);
+  color: var(--color-bone-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.filterClear:hover {
+  color: var(--color-gold-hi);
+}
+
+.filterGroup {
+  padding: 16px 0 12px;
+  border-top: 1px solid rgba(181, 148, 106, 0.18);
+}
+.filterGroup:first-of-type {
+  border-top: 0;
+}
+.filterBare .filterGroup:first-child {
+  border-top: 0;
+}
+.filterGroup h3 {
+  margin-bottom: 8px;
+  font: italic 600 15px var(--font-heading);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.filterOpt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 7px 0;
+  font: 16px var(--font-body);
+  color: var(--color-bone-2);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.filterOpt:hover {
+  color: var(--color-bone);
+}
+/* Input thật nhưng ẩn bằng mắt: vẫn Tab / Space được */
+.filterOpt input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.filterBox {
+  position: relative;
+  flex: none;
+  width: 15px;
+  height: 15px;
+  margin-left: 2px;
+  border: 1px solid var(--color-gold);
+  transform: rotate(45deg);
+  transition: 0.3s var(--ease-spring);
+}
+.filterBox::after {
+  content: '✦';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  line-height: 1;
+  color: var(--color-night);
+  transform: rotate(-45deg) scale(0);
+  transition: transform 0.3s var(--ease-spring);
+}
+.filterOpt input:checked + .filterBox {
+  background: var(--color-gold-hi);
+  border-color: var(--color-gold-hi);
+  box-shadow: 0 0 12px rgba(226, 196, 143, 0.5);
+}
+.filterOpt input:checked + .filterBox::after {
+  transform: rotate(-45deg) scale(1);
+}
+.filterOpt input:checked ~ .filterName {
+  color: var(--color-gold-hi);
+}
+.filterOpt input:focus-visible + .filterBox {
+  outline: 2px solid var(--color-gold-hi);
+  outline-offset: 4px;
+}
+.filterName {
+  flex: 1;
+  min-width: 0;
+}
+.filterNum {
+  flex: none;
+  font-size: 13px;
+  color: #7f877f;
+}
+.filterExpand {
+  margin-top: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* ========== Ngăn kéo "Bộ lọc" (FilterDrawer, ≤ 1180px) ========== */
+.drawer {
+  display: flex;
+  flex-direction: column;
+  width: min(330px, 86vw);
+  background: var(--color-night-2);
+  border-right: 1px solid var(--color-gold);
+  color: var(--color-bone);
+}
+.drawerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 14px 14px 22px;
+  background: var(--color-moss-2);
+  border-bottom: 1px solid rgba(181, 148, 106, 0.3);
+}
+.drawerHead h2 {
+  font: 700 22px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.drawerClose {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--color-gold);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.drawerClose:hover {
+  background: rgba(181, 148, 106, 0.12);
+  color: var(--color-gold-hi);
+}
+.drawerBody {
+  flex: 1;
+  padding: 8px 22px;
+  overflow-y: auto;
+}
+.drawerFoot {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--color-night-2);
+  border-top: 1px solid rgba(181, 148, 106, 0.3);
+}
+.drawerFoot :global(.btn) {
+  padding: 0 14px;
+  font-size: 16px;
+}
+
+/* ========== Ô "Sắp xếp theo" (SortSelect): <select> gốc vẽ lại theo .field ========== */
+.sortWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sortLabel {
+  font: italic 15px var(--font-body);
+  color: var(--color-bone-2);
+  white-space: nowrap;
+}
+.sortSelect {
+  width: auto;
+  min-width: 210px;
+  height: 42px;
+  padding-right: 40px;
+  font: 600 16px var(--font-heading);
+  font-style: normal;
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23b5946a' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px 8px;
+}
+.sortSelect option {
+  background: #121a17;
+  color: #efe8dc;
+}
+
+@media (max-width: 640px) {
+  .sortWrap {
+    flex: 1;
+    min-width: 0;
+  }
+  .sortLabel {
+    display: none;
+  }
+  .sortSelect {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* ========== Hàng chip danh mục con / cùng cha (CategoryChips) — cuộn ngang khi dài ========== */
+.catChips {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 2px 2px 8px;
+}
+.catCount {
+  margin-left: 6px;
+  font: 14px var(--font-body);
+  color: var(--color-gold);
+}
+
+/* ========== Khung giữ chỗ khi tải (ListingSkeleton) — cùng kiểu .o-skel của thẻ sách ========== */
+.skCrumb {
+  width: 260px;
+  height: 20px;
+  margin: 22px 0 14px;
+  border-radius: 3px;
+  background: rgba(181, 148, 106, 0.1);
+}
+.skHero {
+  height: 190px;
+}
+.skChips {
+  width: 70%;
+  height: 40px;
+  margin-top: 18px;
+  border-radius: 3px;
+  background: rgba(181, 148, 106, 0.08);
+}
+.skFilters {
+  height: 420px;
+}
+.skToolbar {
+  height: 42px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  background: rgba(181, 148, 106, 0.08);
+}

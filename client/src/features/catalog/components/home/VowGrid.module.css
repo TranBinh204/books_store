@@ -1,0 +1,59 @@
+/* Lời thề — demo 07 (.vow-grid, .vow) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  overflow: hidden;
+  border: 1px solid rgba(181, 148, 106, 0.25);
+  border-radius: 14px;
+}
+.vow {
+  padding: 34px 26px;
+  text-align: center;
+  background: rgba(23, 37, 31, 0.45);
+  border-right: 1px solid rgba(181, 148, 106, 0.2);
+  transition: background 0.4s;
+}
+.vow:last-child {
+  border-right: 0;
+}
+.vow:hover {
+  background: rgba(44, 74, 62, 0.55);
+}
+.vow svg {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 14px;
+  color: var(--color-gold);
+  transition:
+    transform 0.5s var(--ease-spring),
+    color 0.3s;
+}
+.vow:hover svg {
+  transform: translateY(-4px) scale(1.1);
+  color: var(--color-gold-hi);
+}
+.vow h4 {
+  font: 700 24px var(--font-display);
+  color: var(--color-gold-hi);
+}
+.vow p {
+  margin-top: 4px;
+  font-size: 15px;
+  color: rgba(239, 232, 220, 0.65);
+}
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .vow {
+    border-bottom: 1px solid rgba(181, 148, 106, 0.2);
+  }
+}
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .vow {
+    border-right: 0;
+  }
+}

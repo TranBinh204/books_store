@@ -1,0 +1,123 @@
+/* Bán chạy: bục vinh danh + danh sách — demo 07 (.podium, .pod, .scrollist, .sl) */
+.podium {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 44px;
+}
+.pod {
+  position: relative;
+  text-align: center;
+}
+.crown {
+  display: block;
+  width: 44px;
+  height: 36px;
+  margin: 0 auto;
+  color: var(--color-gold-hi);
+  filter: drop-shadow(0 0 12px var(--color-gold-hi));
+  animation: var(--animate-bob);
+  animation-duration: 3s;
+}
+.star {
+  width: auto;
+  font-size: 30px;
+  line-height: 36px;
+}
+.cv {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 66%;
+  aspect-ratio: 2 / 3;
+  margin: 8px auto 0;
+  overflow: hidden;
+  border-radius: 2px 6px 6px 2px;
+  box-shadow:
+    0 30px 50px -10px rgba(0, 0, 0, 0.9),
+    0 0 0 1px var(--color-gold);
+  transition: transform 0.6s var(--ease-spring);
+}
+.pod:hover .cv {
+  transform: translateY(-12px) scale(1.04);
+}
+.step {
+  margin-top: -20px;
+  padding: 36px 16px 22px;
+  background: linear-gradient(180deg, var(--color-moss), var(--color-moss-2));
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  border-bottom: 0;
+}
+/* Cột cố định: II – I – III (hạng I luôn ở giữa kể cả khi thiếu sách) */
+.p1 {
+  grid-column: 2;
+}
+.p2 {
+  grid-column: 1;
+}
+.p3 {
+  grid-column: 3;
+}
+.p1 .step {
+  padding-top: 56px;
+  background: linear-gradient(180deg, #5b4a2a, #2c2414);
+  border-color: var(--color-gold);
+}
+.rank {
+  font: 900 54px/1 var(--font-display);
+  color: var(--color-gold-hi);
+  text-shadow: 0 0 20px rgba(226, 196, 143, 0.5);
+}
+.pod b {
+  display: block;
+  margin: 4px 0;
+  font: 700 20px/1.2 var(--font-heading);
+}
+.pod small {
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+.buy {
+  margin-top: 12px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+  list-style: none;
+}
+.list li {
+  border-bottom: 1px solid rgba(181, 148, 106, 0.18);
+}
+.n {
+  font: 700 26px var(--font-display);
+  color: var(--color-gold);
+}
+/* Dòng sách: thêm cột số hạng trước bìa */
+.list .row {
+  grid-template-columns: 36px 42px 1fr auto;
+}
+.list .row:hover {
+  padding-left: 14px;
+}
+
+@media (max-width: 900px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .podium {
+    grid-template-columns: 1fr;
+  }
+  .p1,
+  .p2,
+  .p3 {
+    grid-column: auto;
+  }
+  .p1 {
+    order: -1;
+  }
+}
