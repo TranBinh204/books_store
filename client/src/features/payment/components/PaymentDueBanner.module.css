@@ -1,0 +1,35 @@
+/* Khối nhắc hạn thanh toán: viền lửa, đồng hồ đếm ngược */
+.banner {
+  --c: var(--color-ember);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 14px 18px;
+  border: 1px solid var(--c);
+  border-left-width: 4px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+}
+.banner[data-urgent='true'] {
+  --c: #e0766a;
+}
+.banner p {
+  margin: 0;
+  min-width: 220px;
+  flex: 1;
+  color: var(--color-bone-2);
+}
+.banner strong {
+  color: var(--c);
+}
+.clock {
+  font: 700 26px var(--font-heading);
+  font-variant-numeric: tabular-nums;
+  color: var(--c);
+}
+@media (max-width: 520px) {
+  .banner > :last-child {
+    width: 100%;
+  }
+}
