@@ -1,0 +1,146 @@
+/* Khung trang Tài khoản: cột menu trái + nội dung; mobile = hàng chip cuộn ngang */
+.layout {
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.side {
+  position: sticky;
+  top: 96px;
+  padding: 8px 0;
+  overflow: hidden;
+}
+.who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px 18px;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.22);
+}
+.name {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+.name strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 700 18px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+}
+.menu a,
+.menu button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 18px;
+  border-left: 3px solid transparent;
+  font-size: 16px;
+  text-align: left;
+  color: var(--color-bone-2);
+  cursor: pointer;
+  transition: 0.25s;
+}
+.menu a:hover {
+  color: var(--color-gold-hi);
+  background: rgba(181, 148, 106, 0.08);
+}
+.menu a[aria-current='page'] {
+  border-left-color: var(--color-gold-hi);
+  background: rgba(181, 148, 106, 0.16);
+  color: var(--color-gold-hi);
+  font-weight: 700;
+}
+.menu button:hover:not(:disabled) {
+  color: var(--color-ember);
+}
+.menu button:disabled {
+  opacity: 0.5;
+}
+.tabs {
+  display: none;
+}
+.main {
+  min-width: 0;
+}
+
+/* Khung nội dung */
+.panel {
+  padding: 32px;
+  animation: enter 0.5s var(--ease-magic) both;
+}
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.22);
+}
+.chapter {
+  margin: 0 0 4px;
+  font: italic 600 15px var(--font-heading);
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+}
+.head h1 {
+  margin: 0;
+  font: 700 clamp(26px, 4vw, 34px) var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.head h1 em {
+  font-style: normal;
+  color: var(--color-gold);
+}
+.desc {
+  margin: 6px 0 0;
+  color: var(--color-bone-2);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (max-width: 1023px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  .side {
+    display: none;
+  }
+  .tabs {
+    display: flex;
+    gap: 8px;
+    padding-bottom: 6px;
+  }
+  .tabs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .panel {
+    padding: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}

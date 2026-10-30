@@ -1,0 +1,226 @@
+/* Sổ địa chỉ: đếm 10 chấm, lưới thẻ, trạng thái rỗng, hộp xác nhận xoá */
+.add {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.count {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.dots {
+  display: flex;
+  gap: 6px;
+}
+.dots i {
+  width: 9px;
+  height: 9px;
+  rotate: 45deg;
+  border: 1px solid rgba(181, 148, 106, 0.55);
+  transition: 0.3s;
+}
+.dots i[data-on='true'] {
+  border-color: var(--color-gold-hi);
+  background: var(--color-gold-hi);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.skel {
+  height: 150px;
+}
+
+/* Thẻ địa chỉ */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 20px;
+  box-shadow: none;
+}
+.card[data-default='true'] {
+  border-color: var(--color-gold-hi);
+  background: linear-gradient(180deg, rgba(226, 196, 143, 0.1), var(--color-night-2));
+  animation: settle 0.5s var(--ease-magic);
+}
+.who {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+.who strong {
+  font: 700 20px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.who span {
+  color: var(--color-bone-2);
+}
+.who .tag {
+  margin-left: auto;
+  padding: 1px 8px;
+  border: 1px solid var(--color-gold-hi);
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-gold-hi);
+}
+.addr {
+  margin: 0;
+  color: var(--color-bone);
+}
+.note {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-gold);
+}
+.tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+.tools :global(.more) {
+  font-size: 15px;
+  cursor: pointer;
+}
+.tools :global(.more):disabled {
+  opacity: 0.5;
+}
+.icons {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+.icons button {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 4px;
+  color: var(--color-bone-2);
+  cursor: pointer;
+  transition: 0.25s;
+}
+.icons button:hover {
+  color: var(--color-gold-hi);
+  background: rgba(181, 148, 106, 0.14);
+}
+.icons .danger:hover {
+  color: var(--color-ember);
+  background: rgba(214, 90, 60, 0.14);
+}
+
+/* Rỗng */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 36px 0 24px;
+  color: var(--color-bone-2);
+}
+.empty svg {
+  color: var(--color-gold);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.map {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.2s var(--ease-magic) 0.1s forwards;
+}
+.drop {
+  color: var(--color-gold-hi);
+  animation: fall 0.7s var(--ease-magic) 0.6s both;
+}
+.empty p {
+  margin: 0;
+  font: 600 20px var(--font-heading);
+}
+.admin,
+.fail {
+  margin: 0;
+  color: var(--color-bone-2);
+}
+.fail {
+  color: #e0766a;
+}
+.failBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* Xác nhận xoá */
+.confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.confirm p {
+  margin: 0;
+  color: var(--color-bone-2);
+  overflow-wrap: anywhere;
+}
+.confirm strong {
+  color: var(--color-gold-hi);
+}
+.confirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+@keyframes settle {
+  from {
+    opacity: 0.4;
+    transform: translateY(-14px);
+  }
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fall {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .confirmActions > .btn {
+    flex: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card[data-default='true'],
+  .drop {
+    animation: none;
+  }
+  .map {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

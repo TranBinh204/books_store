@@ -1,0 +1,26 @@
+/* Avatar trang tài khoản: vòng vàng, chữ cái đầu bằng font tiêu đề, quầng sáng thở */
+.ring {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-gold-hi);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, rgba(226, 196, 143, 0.22), rgba(14, 19, 17, 0.6));
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-gold-hi);
+  user-select: none;
+  box-shadow: 0 0 14px rgba(226, 196, 143, 0.25);
+  animation: halo 4s ease-in-out infinite;
+}
+@keyframes halo {
+  50% {
+    box-shadow: 0 0 22px rgba(226, 196, 143, 0.5);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    animation: none;
+  }
+}

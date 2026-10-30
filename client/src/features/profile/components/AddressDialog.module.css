@@ -1,0 +1,42 @@
+/* Biểu mẫu trong hộp thêm / sửa địa chỉ */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.fill {
+  align-self: flex-end;
+  margin-top: -6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.fill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.skel {
+  height: 72px;
+}
+.fail {
+  margin: 0;
+  color: #e0766a;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 4px;
+}
+@media (max-width: 520px) {
+  .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .actions > .btn {
+    flex: 1;
+  }
+}
