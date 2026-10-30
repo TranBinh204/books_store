@@ -1,0 +1,103 @@
+/* Thanh tiến độ đơn hàng: các chặng nối bằng đường kẻ vàng */
+.steps {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.steps li {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+/* Đường nối tới chặng trước */
+.steps li + li::before {
+  content: '';
+  position: absolute;
+  top: 17px;
+  right: 50%;
+  width: 100%;
+  height: 2px;
+  background: rgba(181, 148, 106, 0.3);
+}
+.steps li[data-state='done']::before,
+.steps li[data-state='current']::before {
+  background: var(--color-gold-hi);
+}
+.dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1.5px solid rgba(181, 148, 106, 0.5);
+  border-radius: 50%;
+  background: var(--color-night-2);
+  font: 700 16px var(--font-heading);
+  color: var(--color-bone-2);
+}
+.steps li[data-state='done'] .dot {
+  border-color: var(--color-gold-hi);
+  background: var(--color-gold-hi);
+  color: var(--color-night);
+}
+.steps li[data-state='current'] .dot {
+  border-color: var(--color-gold-hi);
+  color: var(--color-gold-hi);
+  box-shadow: 0 0 16px rgba(226, 196, 143, 0.55);
+  animation: glow 2.4s ease-in-out infinite;
+}
+.steps li[data-state='cancel'] .dot {
+  border-color: #8a918a;
+  background: #3a403b;
+  color: #cfd3cf;
+}
+.steps li[data-state='cancel']::before {
+  background: #8a918a;
+}
+.steps[data-cancelled='true'] li[data-state='todo'] {
+  opacity: 0.4;
+}
+.label {
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.steps li[data-state='done'] .label,
+.steps li[data-state='current'] .label {
+  color: var(--color-gold-hi);
+  font-weight: 700;
+}
+@keyframes glow {
+  50% {
+    box-shadow: 0 0 6px rgba(226, 196, 143, 0.25);
+  }
+}
+@media (max-width: 560px) {
+  .steps {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .steps li {
+    flex-direction: row;
+    gap: 14px;
+    text-align: left;
+  }
+  .steps li + li::before {
+    top: -14px;
+    right: auto;
+    left: 17px;
+    width: 2px;
+    height: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .steps li[data-state='current'] .dot {
+    animation: none;
+  }
+}

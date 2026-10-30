@@ -1,0 +1,45 @@
+/* Nhãn trạng thái đơn nền tối: màu theo từng trạng thái */
+.tag {
+  --c: var(--color-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 12px;
+  border: 1px solid var(--c);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--c);
+}
+.tag[data-status='CONFIRMED'] {
+  --c: var(--color-bone);
+}
+.tag[data-status='SHIPPING'] {
+  --c: var(--color-gold-hi);
+}
+.tag[data-status='SHIPPING']::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+.tag[data-status='DELIVERED'] {
+  --c: #8fb08a;
+}
+.tag[data-status='CANCELLED'] {
+  --c: #8a918a;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tag[data-status='SHIPPING']::before {
+    animation: none;
+  }
+}

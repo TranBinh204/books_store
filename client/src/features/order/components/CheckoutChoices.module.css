@@ -1,0 +1,88 @@
+/* Nội dung bên trong các thẻ chọn: địa chỉ, vận chuyển, thanh toán */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.who {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+.who strong {
+  font: 600 18px var(--font-heading);
+  color: var(--color-bone);
+}
+.who span {
+  color: var(--color-bone-2);
+}
+.who .tag {
+  padding: 1px 8px;
+  border: 1px solid rgba(181, 148, 106, 0.5);
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--color-gold-hi);
+}
+.addr {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-bone-2);
+  line-height: 1.5;
+}
+.add {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+/* Thẻ vận chuyển / thanh toán: [icon] tên + mô tả [nhãn bên phải] */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.row svg {
+  flex: none;
+  width: 30px;
+  color: var(--color-gold);
+}
+.row > span:first-of-type {
+  min-width: 0;
+  flex: 1;
+}
+.name {
+  display: block;
+  font: 600 18px var(--font-heading);
+  color: var(--color-bone);
+}
+.desc {
+  display: block;
+  margin-top: 2px;
+  font-size: 15px;
+  color: var(--color-bone-2);
+}
+.free {
+  font: 700 16px var(--font-heading);
+  color: #8fb08a;
+}
+.off {
+  flex: none;
+  padding: 1px 8px;
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--color-bone-2);
+}
+.skel {
+  height: 84px;
+}
+
+@media (max-width: 640px) {
+  .row svg {
+    width: 26px;
+  }
+  .name,
+  .who strong {
+    font-size: 17px;
+  }
+}

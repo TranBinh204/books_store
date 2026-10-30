@@ -1,0 +1,182 @@
+/* Trang /thanh-toan: các chương (.surface) + phiếu giấy da, thanh Hoàn tất dính đáy ≤ 900 */
+.page {
+  padding-bottom: 70px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  align-items: start;
+  gap: 28px;
+  margin-top: 36px;
+}
+.main {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 20px;
+}
+.aside {
+  position: sticky;
+  top: 24px;
+}
+
+/* Chương: đầu có số */
+.section {
+  padding: 22px 26px 26px;
+}
+.section h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 16px;
+  font: 700 22px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.section h2 span {
+  font-size: 15px;
+  color: var(--color-gold);
+  opacity: 0.8;
+}
+.who {
+  margin: 0 0 12px;
+  color: var(--color-bone-2);
+}
+.note {
+  height: auto;
+  min-height: 96px;
+  padding: 12px 14px;
+  font-style: normal;
+  resize: vertical;
+}
+.count {
+  display: block;
+  margin-top: 6px;
+  text-align: right;
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Cảnh báo / lỗi đặt hàng */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border: 1px solid var(--color-ember);
+  border-radius: 4px;
+  background: rgba(224, 128, 62, 0.08);
+  color: var(--color-ember);
+}
+.alert p {
+  margin: 0;
+}
+.alert ul {
+  margin: 6px 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+.alertLink {
+  flex: none;
+  font-weight: 600;
+  text-decoration: underline;
+  color: var(--color-gold-hi);
+}
+
+/* Đang chờ (tải / đang chuyển trang) */
+.wait {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 60px 16px;
+  color: var(--color-bone-2);
+}
+.spin {
+  font-size: 34px;
+  color: var(--color-gold-hi);
+  animation: var(--animate-swirl);
+  animation-duration: 1.6s;
+}
+
+/* Mobile: phiếu thu gọn + thanh dính đáy (ẩn ở desktop) */
+.fold,
+.barOn {
+  display: none;
+  translate: none;
+}
+.fold > button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  border-radius: 4px;
+  color: var(--color-gold-hi);
+  cursor: pointer;
+}
+.fold > button b {
+  font: 700 18px var(--font-heading);
+}
+.foldBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s var(--ease-magic);
+}
+.foldBody > div {
+  min-height: 0;
+  overflow: hidden;
+}
+.fold[data-open='true'] .foldBody {
+  grid-template-rows: 1fr;
+}
+.fold[data-open='true'] .foldBody > div {
+  padding-top: 14px;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding-bottom: 100px;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 20px;
+  }
+  .aside,
+  .actions {
+    display: none;
+  }
+  .fold {
+    display: block;
+    margin-top: 24px;
+  }
+  .barOn {
+    display: flex;
+  }
+  /* Nút lên đầu trang nhích lên khỏi thanh */
+  :global(body):has(.barOn) {
+    --buybar-h: 64px;
+  }
+}
+@media (max-width: 640px) {
+  .section {
+    padding: 18px 16px 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .foldBody,
+  .spin {
+    transition: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,166 @@
+/* Danh sách đơn hàng của tôi */
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 6px;
+}
+.count {
+  opacity: 0.75;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: opacity 0.2s;
+}
+.stale {
+  opacity: 0.6;
+}
+.skel {
+  height: 180px;
+}
+.card {
+  overflow: hidden;
+  box-shadow: none;
+  animation: slide-in 0.5s var(--ease-magic) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.22);
+  font-size: 15px;
+  color: var(--color-bone-2);
+}
+.head strong {
+  font: 700 17px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.date {
+  font-size: 14px;
+}
+.tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.due {
+  padding: 2px 10px;
+  border: 1px solid var(--color-ember);
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-ember);
+}
+.body {
+  display: block;
+  padding: 14px 18px;
+  transition: background 0.25s;
+}
+.body:hover {
+  background: rgba(181, 148, 106, 0.07);
+}
+.body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.body li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.cover {
+  position: relative;
+  width: 48px;
+  aspect-ratio: 2 / 3;
+  flex: none;
+  overflow: hidden;
+  border: 1px solid rgba(181, 148, 106, 0.4);
+  border-radius: 3px;
+}
+.title {
+  display: -webkit-box;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: var(--color-bone);
+}
+.qty {
+  flex: none;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.more {
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 12px 18px;
+  border-top: 1px solid rgba(181, 148, 106, 0.22);
+}
+.sum {
+  color: var(--color-bone-2);
+}
+.sum strong {
+  font: 700 22px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.fail {
+  margin: 0;
+  color: #e0766a;
+}
+.failBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+@media (max-width: 640px) {
+  .foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .actions > * {
+    flex: 1;
+  }
+  .qty {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+  }
+}
