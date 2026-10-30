@@ -1,0 +1,67 @@
+/* Phiếu "Thông tin đơn hàng" trên giấy da (chữ --ink) */
+.inner {
+  padding: 30px 30px 34px;
+}
+.inner h2 {
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgba(42, 29, 16, 0.4);
+  font: 700 24px var(--font-heading);
+}
+.inner dl > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 0;
+  font-size: 15px;
+}
+.free {
+  font-weight: 700;
+  color: var(--color-moss);
+}
+.total {
+  margin-top: 8px;
+  padding-top: 14px !important;
+  border-top: 1px dashed rgba(42, 29, 16, 0.4);
+}
+.total dt {
+  font: 700 18px var(--font-heading);
+}
+.total dd {
+  font: 700 30px var(--font-heading);
+  color: var(--color-blood);
+}
+.note {
+  margin: 8px 0 18px;
+  font-size: 13px;
+  font-style: italic;
+  opacity: 0.8;
+}
+.issue {
+  margin: 0 0 16px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-blood);
+  border-radius: 3px;
+  font-size: 14px;
+  color: var(--color-blood);
+}
+.inner :global(.btn) {
+  width: 100%;
+}
+.back {
+  display: block;
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-blood);
+}
+.back:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 22px 18px 26px;
+  }
+}

@@ -1,0 +1,65 @@
+/* Phần dùng chung của dòng giỏ hàng (CartLine) và hộp thả xuống (CartPopover) */
+.cover {
+  position: relative;
+  display: block;
+  flex: none;
+  width: var(--cover, 96px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  border-radius: 3px;
+  background: var(--color-night-2);
+}
+.cover[data-blocked='true'] {
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+.name {
+  display: -webkit-box;
+  overflow: hidden;
+  font: 600 18px/1.3 var(--font-heading);
+  color: var(--color-bone);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  transition: color 0.25s;
+}
+.name:hover {
+  color: var(--color-gold-hi);
+}
+.flash {
+  padding: 0 7px;
+  border-radius: 2px;
+  background: var(--color-blood);
+  color: #f6dcc8;
+  font: 700 11px/20px var(--font-heading);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.warn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 6px;
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--color-ember);
+}
+.warn button {
+  color: var(--color-gold-hi);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.warn button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.remove.remove {
+  width: 34px;
+  height: 34px;
+  flex: none;
+}
+.remove svg {
+  width: 18px;
+}

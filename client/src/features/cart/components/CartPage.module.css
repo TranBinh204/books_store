@@ -1,0 +1,74 @@
+/* Trang /gio-hang: danh sách (.surface) + phiếu giấy da, thanh thanh toán dính đáy ≤ 900 */
+.page {
+  padding-bottom: 70px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  align-items: start;
+  gap: 28px;
+  margin-top: 36px;
+}
+.list {
+  padding: 4px 26px;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.3);
+  color: var(--color-bone-2);
+}
+.clear {
+  font-size: 14px;
+  color: var(--color-bone-2);
+  cursor: pointer;
+  transition: color 0.25s;
+}
+.clear:hover {
+  color: var(--color-ember);
+}
+.aside {
+  position: sticky;
+  top: 110px;
+}
+.empty {
+  margin-top: 30px;
+}
+.skeleton {
+  height: 96px;
+  margin: 18px 0;
+}
+
+/* Thanh Tổng tiền + Thanh toán dính đáy (ẩn ở desktop) */
+.barOn {
+  display: none;
+  translate: none;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding-bottom: 100px;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 28px;
+  }
+  .aside {
+    position: static;
+  }
+  .barOn {
+    display: flex;
+  }
+  /* Nút lên đầu trang nhích lên khỏi thanh */
+  :global(body):has(.barOn) {
+    --buybar-h: 64px;
+  }
+}
+@media (max-width: 640px) {
+  .list {
+    padding: 0 16px;
+  }
+}

@@ -1,0 +1,141 @@
+/* Giỏ hàng nhanh — hộp thả xuống "Túi hành trang" dưới icon giỏ ở Header */
+.popper {
+  z-index: 1300;
+  width: min(390px, calc(100vw - 24px));
+}
+.pop {
+  position: relative;
+  display: flex;
+  max-height: min(560px, calc(100vh - 110px));
+  flex-direction: column;
+  transform-origin: top right;
+  animation: pop-in 0.28s var(--ease-magic);
+}
+/* Mũi tên chỉ về icon giỏ (căn theo mép phải) */
+.pop::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  right: 17px;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid rgba(181, 148, 106, 0.55);
+  border-left: 1px solid rgba(181, 148, 106, 0.55);
+  background: var(--color-night-2);
+  rotate: 45deg;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 20px;
+  border-bottom: 1px dashed rgba(181, 148, 106, 0.35);
+  font: 700 20px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.note {
+  padding: 24px;
+  text-align: center;
+  color: var(--color-bone-2);
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 34px 24px;
+  text-align: center;
+  color: var(--color-bone-2);
+}
+.center svg {
+  width: 54px;
+  color: var(--color-gold);
+  opacity: 0.45;
+}
+.list {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0 20px;
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(181, 148, 106, 0.4) transparent;
+}
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px dashed rgba(181, 148, 106, 0.22);
+}
+.item:last-child {
+  border-bottom: 0;
+}
+.item > div {
+  min-width: 0;
+  flex: 1;
+}
+.item .name {
+  font-size: 15px;
+}
+.line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.line b {
+  color: var(--color-gold-hi);
+  font-weight: 600;
+}
+.foot {
+  padding: 14px 20px 18px;
+  border-top: 1px solid rgba(181, 148, 106, 0.3);
+  background: rgba(0, 0, 0, 0.18);
+}
+.sum {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: var(--color-bone-2);
+}
+.sum b {
+  font: 700 24px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.actions :global(.btn) {
+  height: 44px;
+  padding: 0 12px;
+  font-size: 16px;
+}
+.hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--color-ember);
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    scale: 0.94;
+    translate: 0 -8px;
+  }
+}
+@media (max-width: 640px) {
+  .pop::before {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pop {
+    animation: none;
+  }
+}
