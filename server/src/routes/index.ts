@@ -3,10 +3,12 @@ import adminRoutes from './admin';
 import authorRoutes from './author.routes';
 import authRoutes from './auth.routes';
 import bookRoutes from './book.routes';
+import { publicCartRoutes } from './cart.routes';
 import categoryRoutes from './category.routes';
 import healthRoutes from './health.routes';
 import homeRoutes from './home.routes';
 import meRoutes from './me.routes';
+import paymentRoutes from './payment.routes';
 import searchRoutes from './search.routes';
 
 const router = Router();
@@ -24,6 +26,9 @@ router.use('/categories', categoryRoutes);
 router.use('/books', bookRoutes);
 router.use('/authors', authorRoutes);
 router.use('/search', searchRoutes);
+router.use('/cart', publicCartRoutes);
+// Thanh toán VNPay: IPN, Return URL — công khai, kiểm tra chữ ký (M07)
+router.use('/payments', paymentRoutes);
 
 router.use('/admin', adminRoutes);
 
