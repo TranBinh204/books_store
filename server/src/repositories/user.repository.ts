@@ -72,3 +72,17 @@ export async function updatePassword(
     passwordHash,
   ]);
 }
+
+export interface ProfileFields {
+  fullName: string;
+  phone: string | null;
+  birthday: string | null;
+  gender: User['gender'];
+}
+
+export async function updateProfile(id: number, fields: ProfileFields, db: Queryable = pool) {
+  await db.query(
+    'UPDATE users SET full_name = $2, phone = $3, birthday = $4, gender = $5 WHERE id = $1',
+    [id, fields.fullName, fields.phone, fields.birthday, fields.gender],
+  );
+}
