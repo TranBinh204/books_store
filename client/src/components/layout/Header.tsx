@@ -10,11 +10,13 @@ import {
   IconLogout,
   IconMenu,
   IconPlus,
+  IconReceipt,
   IconUser,
 } from '@/components/ui/icons';
 import { AccountMenu, useCurrentUser, useLogout } from '@/features/auth';
 import { categoryHref, type PublicCategoryNode } from '@/features/catalog';
 import { errorMessage } from '@/lib/form';
+import { CartButton } from './CartButton';
 import styles from './Header.module.css';
 import { Logo } from './Logo';
 import { SearchBox } from './SearchBox';
@@ -69,6 +71,12 @@ function DrawerAccount() {
         <IconUser />
         Tài khoản của tôi
       </Link>
+      {user.role === 'CUSTOMER' && (
+        <Link href="/tai-khoan/don-hang">
+          <IconReceipt />
+          Đơn hàng của tôi
+        </Link>
+      )}
       {user.role === 'ADMIN' && (
         <Link href="/admin">
           <IconDesktop />
@@ -176,6 +184,7 @@ export function Header({ categories = [] }: { categories?: PublicCategoryNode[] 
 
           <div className={styles.icons}>
             <AccountMenu className="ic" />
+            <CartButton className={`ic ${styles.keepMobile}`} />
           </div>
         </div>
       </header>
