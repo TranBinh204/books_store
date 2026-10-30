@@ -75,6 +75,37 @@ const envSchema = z
     CLOUDINARY_API_KEY: z.string().optional(),
     CLOUDINARY_API_SECRET: z.string().optional(),
     CLOUDINARY_FOLDER: z.string().default('bookstore'),
+
+    // Thanh toán VNPay (F12) — docs/04-integrations/vnpay-sandbox.md
+    // Bỏ trống TMN_CODE + HASH_SECRET = tắt VNPay (chỉ nhận COD)
+    VNPAY_TMN_CODE: z.string().optional(),
+    VNPAY_HASH_SECRET: z.string().optional(),
+    VNPAY_URL: z.url().default('https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'),
+    VNPAY_RETURN_URL: z.url().default('http://localhost:3000/thanh-toan/ket-qua'),
+    VNPAY_PAYMENT_TTL_MINUTES: z.coerce.number().int().positive().default(15),
+    VNPAY_CANCEL_GRACE_MINUTES: z.coerce.number().int().nonnegative().default(5),
+    ORDER_EXPIRE_JOB_INTERVAL_SECONDS: z.coerce.number().int().positive().default(60),
+    // CHỈ DEV: /return có chữ ký hợp lệ được xử lý như IPN (local không nhận được IPN)
+    VNPAY_IPN_FROM_RETURN: z
+      .enum(['true', 'false'])
+      .default('false')
+      .transform((value) => value === 'true'),
+  })
+  .superRefine((value, ctx) => {
+    if (Boolean(value.VNPAY_TMN_CODE) !== Boolean(value.VNPAY_HASH_SECRET)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['VNPAY_HASH_SECRET'],
+        message: 'Điền cả VNPAY_TMN_CODE và VNPAY_HASH_SECRET (hoặc bỏ trống cả hai để tắt VNPay)',
+      });
+    }
+    if (value.VNPAY_IPN_FROM_RETURN && value.NODE_ENV === 'production') {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['VNPAY_IPN_FROM_RETURN'],
+        message: 'Không được bật khi NODE_ENV=production',
+      });
+    }
   })
   .superRefine((value, ctx) => {
     if (value.IMAGE_STORAGE !== 'cloudinary') return;
@@ -110,4 +141,6 @@ export const env = {
     data.NODE_ENV === 'test' && data.DATABASE_URL_TEST ? data.DATABASE_URL_TEST : data.DATABASE_URL,
   isProduction: data.NODE_ENV === 'production',
   isTest: data.NODE_ENV === 'test',
+  /** Đã điền mã website + khoá bí mật VNPay */
+  vnpayEnabled: Boolean(data.VNPAY_TMN_CODE && data.VNPAY_HASH_SECRET),
 };

@@ -1,10 +1,12 @@
-﻿import type { Server } from 'node:http';
+import type { Server } from 'node:http';
 import { app } from './app';
 import { env } from './config/env';
 import { pool } from './db/pool';
+import { startExpireUnpaidOrdersJob } from './jobs/expire-unpaid-orders';
 import { seedDefaultAdmin } from './seeds/admin.seed';
 
 let server: Server | undefined;
+let stopJobs: (() => void)[] = [];
 
 async function start() {
   // Tạo Admin mặc định nếu DB chưa có Admin — lỗi ở bước này không chặn server khởi động
@@ -13,10 +15,22 @@ async function start() {
   server = app.listen(env.PORT, () => {
     console.log(`🚀 Server đang chạy tại http://localhost:${env.PORT} (${env.NODE_ENV})`);
   });
+
+  if (!env.vnpayEnabled) {
+    console.warn('⚠️  VNPay chưa cấu hình (VNPAY_TMN_CODE, VNPAY_HASH_SECRET) → chỉ nhận COD');
+  } else if (env.VNPAY_IPN_FROM_RETURN) {
+    console.warn(
+      '⚠️  VNPAY_IPN_FROM_RETURN=true: trang kết quả cập nhật thanh toán thay IPN (chỉ dev)',
+    );
+  }
+
+  // Tự huỷ đơn VNPay quá hạn thanh toán (M07)
+  stopJobs = [startExpireUnpaidOrdersJob()];
 }
 
 async function shutdown(signal: string) {
   console.log(`${signal} → đang tắt server...`);
+  stopJobs.forEach((stop) => stop());
   const closeConnections = async () => {
     await pool.end().catch(() => undefined);
     process.exit(0);
