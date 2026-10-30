@@ -1,0 +1,58 @@
+/* Khung trang thanh toán tối giản: logo + bước + chân trang (không menu / footer cửa hàng) */
+.shell {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.top {
+  background: var(--color-night);
+  border-bottom: 1px solid rgba(181, 148, 106, 0.3);
+}
+.topInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 14px;
+}
+.secure {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.secure svg {
+  width: 18px;
+  color: var(--color-gold);
+}
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 18px 0;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.steps a:hover {
+  color: var(--color-gold-hi);
+}
+.steps span[aria-hidden='true'] {
+  font-size: 10px;
+  color: var(--color-gold);
+}
+.steps [aria-current='page'] {
+  color: var(--color-gold-hi);
+}
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.foot {
+  padding: 18px 16px;
+  border-top: 1px solid rgba(181, 148, 106, 0.25);
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
