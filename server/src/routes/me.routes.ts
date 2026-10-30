@@ -7,6 +7,8 @@ import { idParamSchema } from '../schemas/common.schema';
 import { changePasswordSchema, updateProfileSchema } from '../schemas/profile.schema';
 import { asyncHandler } from '../utils/asyncHandler';
 import addressRoutes from './address.routes';
+import { myCartRoutes } from './cart.routes';
+import orderRoutes from './order.routes';
 
 // /api/me — mọi API cần đăng nhập, chỉ thao tác dữ liệu của chính mình (M04)
 const router = Router();
@@ -37,5 +39,7 @@ router.delete(
 );
 
 router.use('/addresses', addressRoutes);
+router.use('/cart', myCartRoutes);
+router.use('/orders', orderRoutes);
 
 export default router;
