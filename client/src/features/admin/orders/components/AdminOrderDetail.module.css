@@ -1,0 +1,212 @@
+/* Chi tiết đơn hàng Admin (docs/06-ui-ux/admin/09-chi-tiet-don-hang.md); khung = `.a-panel`, tag = AdminTag */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+.col {
+  /* 1 cột: các khối xếp theo `order` bên dưới */
+  display: contents;
+}
+.items {
+  order: 1;
+}
+.ship {
+  order: 2;
+}
+.customer {
+  order: 3;
+}
+.pay {
+  order: 4;
+}
+.history {
+  order: 5;
+}
+.card h2 {
+  margin-bottom: 12px;
+  font: 700 20px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Sản phẩm ---------- */
+.lines > li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+.lines > li + li {
+  border-top: 1px solid rgba(181, 148, 106, 0.18);
+}
+.lineInfo {
+  min-width: 0;
+  flex: 1;
+  font-size: 15px;
+}
+.lineTitle {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: var(--color-bone);
+}
+.lineTitle:hover {
+  color: var(--color-gold-hi);
+}
+.lineSub {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  color: var(--color-bone-2);
+}
+.lineTotal {
+  flex: none;
+  font-weight: 700;
+  color: var(--color-bone);
+}
+.sums {
+  display: flex;
+  max-width: 320px;
+  flex-direction: column;
+  gap: 4px;
+  margin: 12px 0 0 auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(181, 148, 106, 0.35);
+  font-size: 15px;
+}
+.sums > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.sums dt {
+  color: var(--color-bone-2);
+}
+.grand dt {
+  font-weight: 700;
+  color: var(--color-bone);
+}
+.grand dd {
+  font: 700 24px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+
+/* ---------- Thanh toán / khách / giao hàng ---------- */
+.facts {
+  display: grid;
+  gap: 4px 16px;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+.facts span > span {
+  color: var(--color-bone-2);
+}
+.lines2 {
+  font-size: 15px;
+  color: var(--color-bone-2);
+}
+.name {
+  font-weight: 700;
+  color: var(--color-bone);
+}
+.name:hover {
+  color: var(--color-gold-hi);
+}
+.note {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-left: 3px solid var(--color-gold);
+  background: rgba(226, 196, 143, 0.08);
+  font-size: 15px;
+  color: var(--color-bone);
+}
+
+/* ---------- Lịch sử ---------- */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 18px;
+  border-left: 2px solid rgba(181, 148, 106, 0.35);
+}
+.timeline li {
+  position: relative;
+}
+.dot {
+  position: absolute;
+  top: 6px;
+  left: -25px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(181, 148, 106, 0.5);
+}
+.dotNow {
+  background: var(--color-gold-hi);
+  box-shadow: 0 0 10px rgba(226, 196, 143, 0.55);
+}
+.evt {
+  font-size: 15px;
+  color: var(--color-bone-2);
+}
+.evtNow {
+  font-weight: 700;
+  color: var(--color-bone);
+}
+.evtMeta {
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+
+/* ---------- Thanh thao tác dính đáy (dưới 1180px) ---------- */
+.bar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(181, 148, 106, 0.35);
+  background: rgba(14, 19, 17, 0.94);
+  backdrop-filter: blur(6px);
+}
+.bar > * {
+  flex: 1;
+}
+.barSpace {
+  height: 72px;
+}
+
+@media (min-width: 640px) {
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1180px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) 360px;
+  }
+  .col {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .items,
+  .ship,
+  .customer,
+  .pay,
+  .history {
+    order: 0;
+  }
+}

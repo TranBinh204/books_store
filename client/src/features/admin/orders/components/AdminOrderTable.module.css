@@ -1,0 +1,47 @@
+/* Bảng đơn hàng Admin, dùng ở danh sách đơn và chi tiết khách hàng */
+.codeCell,
+.customerCell,
+.payCell {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1.25;
+}
+.code {
+  font-weight: 700;
+  color: var(--color-gold-hi);
+}
+.sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+.total {
+  font-weight: 700;
+  color: var(--color-gold-hi);
+}
+.late {
+  margin-left: 6px;
+}
+.wide {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.narrowOnly {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .narrowOnly {
+    display: block;
+  }
+}

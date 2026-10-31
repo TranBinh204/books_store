@@ -1,0 +1,72 @@
+/* Danh sách khách hàng Admin (docs/06-ui-ux/admin/10-khach-hang.md); khung = `.a-panel`, tag = AdminTag */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.search {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+.select {
+  width: 176px;
+}
+.statusRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.statusGroup {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.who {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+.whoText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--color-bone);
+}
+.mail {
+  display: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+.spent {
+  font-weight: 700;
+  color: var(--color-gold-hi);
+}
+.cell {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+@media (max-width: 899px) {
+  .mail {
+    display: block;
+  }
+  .select {
+    width: 100%;
+  }
+}

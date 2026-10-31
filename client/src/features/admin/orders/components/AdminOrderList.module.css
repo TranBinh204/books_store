@@ -1,0 +1,79 @@
+/* Danh sách đơn hàng Admin (docs/06-ui-ux/admin/08-don-hang.md); khung = `.a-panel`, tag = AdminTag */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 12px;
+  overflow-x: auto;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.35);
+}
+.tab {
+  display: inline-flex;
+  flex: none;
+  cursor: pointer;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: -1px;
+  padding: 8px 12px;
+  border-bottom: 2px solid transparent;
+  font: 600 17px var(--font-heading);
+  white-space: nowrap;
+  color: var(--color-bone-2);
+}
+.tab:hover {
+  color: var(--color-gold-hi);
+}
+.tabActive {
+  border-bottom-color: var(--color-gold-hi);
+  color: var(--color-gold-hi);
+}
+.pill {
+  min-width: 24px;
+  padding: 0 7px;
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  border-radius: 99px;
+  font: 700 13px/20px var(--font-body);
+  text-align: center;
+  color: var(--color-bone-2);
+}
+.pillAlert {
+  border-color: var(--color-blood);
+  background: var(--color-blood);
+  color: #f6dcc8;
+}
+.toolbar {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.search {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+.select {
+  width: 168px;
+}
+.moreBtn {
+  margin-left: auto;
+}
+.advanced {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(181, 148, 106, 0.18);
+}
+
+@media (max-width: 899px) {
+  .select {
+    width: 100%;
+  }
+  .moreBtn {
+    margin-left: 0;
+  }
+}
