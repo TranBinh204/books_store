@@ -2,19 +2,31 @@
 
 import { Drawer, Tooltip } from '@mui/material';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useSnackbar } from 'notistack';
 import { useState, type ComponentType, type ReactNode, type SVGProps } from 'react';
+import { HoverMenu } from '@/components/ui/HoverMenu';
 import {
+  IconBolt,
   IconBook,
   IconBuilding,
   IconCategory,
   IconCollapse,
   IconDashboard,
   IconInventory,
+  IconLogout,
   IconMenu,
+  IconReceipt,
+  IconReview,
   IconStore,
   IconUser,
+  IconUsers,
+  IconVoucher,
 } from '@/components/ui/icons';
+import { useAdminOrderCounts } from '@/features/admin/orders';
+import { useCurrentUser, useLogout } from '@/features/auth';
+import { errorMessage } from '@/lib/form';
+import { UserAvatar } from '@/features/profile';
 import styles from './AdminShell.module.css';
 
 interface NavItem {
@@ -23,7 +35,6 @@ interface NavItem {
   icon: ComponentType<SVGProps<SVGSVGElement>>;
 }
 
-/** Menu bên trái — thêm nhóm / mục khi làm từng module */
 const NAV_GROUPS: { title: string; items: NavItem[] }[] = [
   {
     title: 'Tổng quan',
@@ -37,6 +48,16 @@ const NAV_GROUPS: { title: string; items: NavItem[] }[] = [
       { href: '/admin/tac-gia', label: 'Tác giả', icon: IconUser },
       { href: '/admin/nha-xuat-ban', label: 'Nhà xuất bản', icon: IconBuilding },
       { href: '/admin/ton-kho', label: 'Lịch sử tồn kho', icon: IconInventory },
+    ],
+  },
+  {
+    title: 'Bán hàng',
+    items: [
+      { href: '/admin/don-hang', label: 'Đơn hàng', icon: IconReceipt },
+      { href: '/admin/khach-hang', label: 'Khách hàng', icon: IconUsers },
+      { href: '/admin/danh-gia', label: 'Đánh giá', icon: IconReview },
+      { href: '/admin/voucher', label: 'Voucher', icon: IconVoucher },
+      { href: '/admin/flash-sale', label: 'Flash Sale', icon: IconBolt },
     ],
   },
 ];
@@ -77,8 +98,9 @@ function SidebarContent({
   onNavigate?: () => void;
 }) {
   const pathname = usePathname();
-  // Số đếm trên từng mục theo href (vd. đơn chờ xác nhận) — module bổ sung, 0 / không có = không hiện
-  const badges: Record<string, number> = {};
+  // Badge số đơn Chờ xác nhận ở mục Đơn hàng (M08 Q11) — tự cập nhật 60 giây
+  const pendingOrders = useAdminOrderCounts().data?.PENDING ?? 0;
+  const badgeOf = (href: string) => (href === '/admin/don-hang' ? pendingOrders : 0);
 
   return (
     <nav
@@ -105,7 +127,7 @@ function SidebarContent({
               <div className={styles.groupTitle}>{group.title}</div>
             )}
             {group.items.map(({ href, label, icon: Icon }) => {
-              const count = badges[href] ?? 0;
+              const count = badgeOf(href);
               return (
                 // Thu gọn → rê chuột vào icon để xem tên mục
                 <Tooltip key={href} title={collapsed ? label : ''} placement="right">
@@ -149,10 +171,73 @@ function SidebarContent({
   );
 }
 
+/** Menu tài khoản trên thanh trên: rê chuột là sổ ra (cảm ứng: bấm) */
+function AdminAccount() {
+  const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+  const { data: user } = useCurrentUser();
+  const logout = useLogout();
+  const [open, setOpen] = useState(false);
+
+  const handleLogout = () => {
+    setOpen(false);
+    logout.mutate(undefined, {
+      onSuccess: () => {
+        enqueueSnackbar('Đã đăng xuất', { variant: 'info' });
+        router.replace('/dang-nhap');
+      },
+      onError: (error) => enqueueSnackbar(errorMessage(error), { variant: 'error' }),
+    });
+  };
+
+  if (!user) return null;
+
+  return (
+    <HoverMenu
+      open={open}
+      onOpenChange={setOpen}
+      panelClassName={styles.menu}
+      trigger={({ toggle }) => (
+        <button
+          type="button"
+          onClick={toggle}
+          className={styles.me}
+          aria-haspopup="menu"
+          aria-expanded={open}
+          aria-label={`Tài khoản: ${user.fullName}`}
+        >
+          <span className={styles.meName}>{user.fullName}</span>
+          <UserAvatar fullName={user.fullName} size={34} />
+        </button>
+      )}
+    >
+      {(close) => (
+        <>
+          <div className="menu-who">
+            <b>{user.fullName}</b>
+            <span>{user.email}</span>
+          </div>
+          <nav className="menu-list" aria-label="Tài khoản">
+            <Link href="/" target="_blank" onClick={close}>
+              <IconStore />
+              Xem cửa hàng
+            </Link>
+            <div className="menu-sep" />
+            <button type="button" onClick={handleLogout} disabled={logout.isPending}>
+              <IconLogout />
+              Đăng xuất
+            </button>
+          </nav>
+        </>
+      )}
+    </HoverMenu>
+  );
+}
+
 /** Khung trang quản trị: sidebar trái (cố định trên desktop ≥ 1180px, ngăn kéo bên dưới) + thanh trên */
 export function AdminShell({ children }: { children: ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  // Bọc AdminShell sau RequireRole (module Auth) → chỉ render ở trình duyệt, đọc storage ngay không lệch SSR
+  // AdminShell chỉ render ở trình duyệt (sau RequireRole) → đọc storage ngay khi khởi tạo không lệch SSR
   const [collapsed, setCollapsed] = useState(readCollapsed);
 
   const toggleCollapsed = () => {
@@ -201,8 +286,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
               <IconCollapse />
             </button>
           </Tooltip>
-          {/* Menu tài khoản Admin — làm ở module Auth */}
-          <div className={styles.right} />
+          <div className={styles.right}>
+            <AdminAccount />
+          </div>
         </header>
 
         <main className={styles.content}>{children}</main>
