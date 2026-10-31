@@ -8,7 +8,9 @@ import { inventoryLogQuerySchema } from '../../schemas/inventory.schema';
 import { asyncHandler } from '../../utils/asyncHandler';
 import bookRoutes from './book.routes';
 import categoryRoutes from './category.routes';
+import customerRoutes from './customer.routes';
 import { authorRoutes, publisherRoutes } from './named-entity.routes';
+import orderRoutes from './order.routes';
 
 const router = Router();
 
@@ -19,6 +21,11 @@ router.use('/categories', categoryRoutes);
 router.use('/authors', authorRoutes);
 router.use('/publishers', publisherRoutes);
 router.use('/books', bookRoutes);
+
+// Đơn hàng & khách hàng (M08)
+router.use('/orders', orderRoutes);
+router.use('/customers', customerRoutes);
+
 router.post('/uploads/images', uploadImages, asyncHandler(uploadController.uploadImages));
 router.get(
   '/inventory-logs',
