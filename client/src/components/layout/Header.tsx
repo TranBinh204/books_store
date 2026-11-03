@@ -114,6 +114,7 @@ export function Header({ categories = [] }: { categories?: PublicCategoryNode[] 
 
   // Chuyển trang thì đóng drawer
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDrawerOpen(false);
   }, [pathname]);
 
