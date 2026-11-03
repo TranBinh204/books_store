@@ -9,6 +9,7 @@ import { asyncHandler } from '../utils/asyncHandler';
 import addressRoutes from './address.routes';
 import { myCartRoutes } from './cart.routes';
 import orderRoutes from './order.routes';
+import wishlistRoutes from './wishlist.routes';
 
 // /api/me — mọi API cần đăng nhập, chỉ thao tác dữ liệu của chính mình (M04)
 const router = Router();
@@ -41,5 +42,6 @@ router.delete(
 router.use('/addresses', addressRoutes);
 router.use('/cart', myCartRoutes);
 router.use('/orders', orderRoutes);
+router.use('/wishlist', wishlistRoutes);
 
 export default router;
