@@ -7,5 +7,5 @@ module.exports = async () => {
       'Thiếu DATABASE_URL_TEST — chạy test trong container: docker compose exec server npm test',
     );
   }
-  execSync('npx node-pg-migrate up -d DATABASE_URL_TEST --verbose false', { stdio: 'inherit' });
+  execSync('npx node-pg-migrate up -d DATABASE_URL_TEST --verbose false --check-order false', { stdio: 'inherit' });
 };
