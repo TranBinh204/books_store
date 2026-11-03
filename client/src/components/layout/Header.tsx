@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { Icon } from '@/components/ui/Icon';
 import {
   IconDesktop,
+  IconHeart,
   IconLogout,
   IconMenu,
   IconPlus,
@@ -46,36 +47,44 @@ function DrawerAccount() {
   const { enqueueSnackbar } = useSnackbar();
   const { data: user, isPending } = useCurrentUser();
   const logout = useLogout();
+
   if (isPending) return null;
 
   if (!user) {
     return (
-      <>
-        <p className={styles.drawerTitle}>Tài khoản</p>
-        <Link href="/dang-nhap">
-          <IconUser />
-          Đăng nhập
-        </Link>
-        <Link href="/dang-ky">
-          <IconPlus />
-          Đăng ký
-        </Link>
-      </>
+      <Link href="/dang-nhap">
+        <IconUser />
+        Đăng nhập / Đăng ký
+      </Link>
     );
   }
 
   return (
     <>
-      <p className={styles.drawerTitle}>{user.fullName}</p>
+      <div className={styles.drawerUser}>
+        <span className={styles.drawerAvatar}>
+          {(user.fullName || user.email).charAt(0).toUpperCase()}
+        </span>
+        <div className={styles.drawerUserMeta}>
+          <span className={styles.drawerUserName}>{user.fullName || 'Khách hàng'}</span>
+          <span className={styles.drawerUserEmail}>{user.email}</span>
+        </div>
+      </div>
       <Link href="/tai-khoan">
         <IconUser />
-        Tài khoản của tôi
+        Thông tin cá nhân
       </Link>
       {user.role === 'CUSTOMER' && (
-        <Link href="/tai-khoan/don-hang">
-          <IconReceipt />
-          Đơn hàng của tôi
-        </Link>
+        <>
+          <Link href="/tai-khoan/don-hang">
+            <IconReceipt />
+            Đơn hàng của tôi
+          </Link>
+          <Link href="/tai-khoan/yeu-thich">
+            <IconHeart />
+            Sách yêu thích
+          </Link>
+        </>
       )}
       {user.role === 'ADMIN' && (
         <Link href="/admin">
@@ -129,12 +138,12 @@ export function Header({ categories = [] }: { categories?: PublicCategoryNode[] 
   return (
     <>
       <header className={styles.header}>
-        <div className={`wrap ${styles.hd}`}>
+        <div className={styles.in}>
           <button
             type="button"
-            className={`ic ${styles.burger}`}
-            onClick={() => setDrawerOpen(true)}
-            aria-label="Mở menu danh mục"
+            className={styles.burger}
+            onClick={() => setDrawerOpen((prev) => !prev)}
+            aria-label={drawerOpen ? 'Đóng menu' : 'Mở menu'}
             aria-expanded={drawerOpen}
           >
             <IconMenu />
@@ -142,31 +151,37 @@ export function Header({ categories = [] }: { categories?: PublicCategoryNode[] 
 
           <Logo />
 
-          <nav className={styles.nav} aria-label="Menu chính">
-            <div className={styles.hasMega}>
-              <Link href="/tim-kiem" aria-haspopup="true">
-                Vương quốc ▾
-              </Link>
-              <div className={styles.mega}>
-                <div className={`wrap ${styles.megaIn}`}>
+          <nav className={styles.nav} aria-label="Điều hướng chính">
+            <div className={styles.megaTrigger}>
+              <button
+                type="button"
+                className={styles.megaBtn}
+                aria-haspopup="true"
+                aria-label="Danh mục sách"
+              >
+                <span>Danh mục</span>
+                <span className={styles.chev}>
+                  <IconPlus />
+                </span>
+              </button>
+
+              <div className={styles.mega} role="region" aria-label="Tất cả danh mục">
+                <div className={styles.megaGrid}>
                   {categories.slice(0, MEGA_ROOTS).map((root) => (
-                    <div key={root.id}>
-                      <h4>
+                    <div key={root.id} className={styles.col}>
+                      <Link href={categoryHref(root.id)} className={styles.rootLink}>
                         <Icon name={root.iconKey} />
-                        <Link href={categoryHref(root.id)}>{root.name}</Link>
-                      </h4>
-                      <ul>
-                        {root.children.slice(0, MEGA_CHILDREN).map((child) => (
-                          <li key={child.id}>
-                            <Link href={categoryHref(child.id)}>{child.name}</Link>
+                        <span>{root.name}</span>
+                      </Link>
+                      <ul className={styles.subs}>
+                        {root.children.slice(0, MEGA_CHILDREN).map((sub) => (
+                          <li key={sub.id}>
+                            <Link href={categoryHref(sub.id)}>{sub.name}</Link>
                           </li>
                         ))}
                       </ul>
                     </div>
                   ))}
-                  <Link href="/tim-kiem" className={styles.megaAll}>
-                    Xem tất cả vương quốc →
-                  </Link>
                 </div>
               </div>
             </div>
@@ -184,6 +199,9 @@ export function Header({ categories = [] }: { categories?: PublicCategoryNode[] 
           <SearchBox />
 
           <div className={styles.icons}>
+            <Link className="ic" href="/tai-khoan/yeu-thich" aria-label="Sách yêu thích">
+              <IconHeart />
+            </Link>
             <AccountMenu className="ic" />
             <CartButton className={`ic ${styles.keepMobile}`} />
           </div>
