@@ -76,6 +76,9 @@ const envSchema = z
     CLOUDINARY_API_SECRET: z.string().optional(),
     CLOUDINARY_FOLDER: z.string().default('bookstore'),
 
+    // Sách yêu thích (F14) — số sách tối đa / tài khoản
+    WISHLIST_MAX_ITEMS: z.coerce.number().int().positive().default(200),
+
     // Thanh toán VNPay (F12) — docs/04-integrations/vnpay-sandbox.md
     // Bỏ trống TMN_CODE + HASH_SECRET = tắt VNPay (chỉ nhận COD)
     VNPAY_TMN_CODE: z.string().optional(),
