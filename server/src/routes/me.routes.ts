@@ -8,6 +8,7 @@ import { changePasswordSchema, updateProfileSchema } from '../schemas/profile.sc
 import { asyncHandler } from '../utils/asyncHandler';
 import addressRoutes from './address.routes';
 import { myCartRoutes } from './cart.routes';
+import meReviewRoutes from './me-review.routes';
 import orderRoutes from './order.routes';
 import wishlistRoutes from './wishlist.routes';
 
@@ -41,6 +42,8 @@ router.delete(
 
 router.use('/addresses', addressRoutes);
 router.use('/cart', myCartRoutes);
+// Đánh giá (M10): /reviews, /books/:bookId/review-status, /orders/:id/reviews — trước '/orders'
+router.use(meReviewRoutes);
 router.use('/orders', orderRoutes);
 router.use('/wishlist', wishlistRoutes);
 

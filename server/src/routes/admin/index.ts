@@ -11,6 +11,7 @@ import categoryRoutes from './category.routes';
 import customerRoutes from './customer.routes';
 import { authorRoutes, publisherRoutes } from './named-entity.routes';
 import orderRoutes from './order.routes';
+import reviewRoutes from './review.routes';
 
 const router = Router();
 
@@ -25,6 +26,9 @@ router.use('/books', bookRoutes);
 // Đơn hàng & khách hàng (M08)
 router.use('/orders', orderRoutes);
 router.use('/customers', customerRoutes);
+
+// Đánh giá (M10)
+router.use('/reviews', reviewRoutes);
 
 router.post('/uploads/images', uploadImages, asyncHandler(uploadController.uploadImages));
 router.get(
