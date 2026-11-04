@@ -1,4 +1,4 @@
-/* Header cửa hàng — chép từ demo 07 (header, .hd, nav.main, .drawer). Nút .ic / .badge ở styles/ui.css */
+/* Header cửa hàng — chép từ demo 07 (header, .hd, nav.main, .mega, .drawer). Nút .ic / .badge ở styles/ui.css */
 
 .header {
   position: sticky;
@@ -25,7 +25,8 @@
   display: flex;
   gap: 2px;
 }
-.nav > a {
+.nav > a,
+.hasMega > a {
   position: relative;
   display: block;
   padding: 10px 13px;
@@ -37,12 +38,14 @@
     text-shadow 0.3s;
 }
 .nav > a:hover,
+.hasMega:hover > a,
 .nav > a[aria-current='page'] {
   color: var(--color-gold-hi);
   text-shadow: 0 0 12px rgba(226, 196, 143, 0.6);
 }
 /* Ngôi sao nhỏ nảy ra dưới chữ khi hover */
-.nav > a::before {
+.nav > a::before,
+.hasMega > a::before {
   content: '✦';
   position: absolute;
   left: 50%;
@@ -52,10 +55,74 @@
   transform: translateX(-50%) scale(0);
   transition: transform 0.4s var(--ease-spring);
 }
-.nav > a:hover::before {
+.nav > a:hover::before,
+.hasMega:hover > a::before {
   transform: translateX(-50%) scale(1);
 }
 
+/* ---------- Mega menu danh mục ---------- */
+.mega {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: radial-gradient(80% 120% at 50% 0, var(--color-moss-2), var(--color-night));
+  border-bottom: 1px solid rgba(181, 148, 106, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: 0.4s var(--ease-magic);
+}
+.hasMega:hover .mega,
+.hasMega:focus-within .mega {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.megaIn {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 26px;
+  padding: 34px 0;
+}
+.mega h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font: 700 19px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.mega h4 svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--color-gold);
+}
+.mega ul {
+  list-style: none;
+  display: grid;
+  gap: 3px;
+  font-size: 15px;
+  color: var(--color-bone-2);
+}
+.mega li a {
+  transition: 0.25s;
+}
+.mega li a:hover {
+  color: var(--color-bone);
+  padding-left: 6px;
+}
+.megaAll {
+  grid-column: 1 / -1;
+  justify-self: center;
+  font: 700 17px var(--font-heading);
+  color: var(--color-gold-hi);
+  border-bottom: 1px solid var(--color-gold);
+  letter-spacing: 0.05em;
+}
+
+/* Khu icon bên phải header */
 .icons {
   display: flex;
   gap: 4px;

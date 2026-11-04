@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect } from 'react';
-import { StatusPage } from '@/components/ui/StatusPage';
+import { StatusPage } from '@/components/shop/StatusPage';
 
 // Lỗi khi tải một trang quản trị — hiện trong khung Admin (sidebar + thanh trên vẫn còn)
 export default function AdminError({
@@ -20,22 +20,21 @@ export default function AdminError({
     <StatusPage
       tone="error"
       code="Lỗi"
-      chapter="Phép thuật trục trặc"
+      chapter="Trang quản trị"
       title={
         <>
-          Đã có lỗi <em>xảy ra</em>
+          Không tải được <em>dữ liệu</em>
         </>
       }
-      message="Không tải được trang quản trị này, bạn vui lòng thử lại."
+      message="Không lấy được dữ liệu quản trị, bạn vui lòng thử lại sau ít phút."
       detail={error.digest ? `Mã lỗi: ${error.digest}` : undefined}
     >
       <button type="button" className="btn btn-gold" onClick={() => retry()}>
         <span>Thử lại</span>
       </button>
-      <Link href="/admin" className="btn btn-ghost">
-        <span>Về Tổng quan</span>
+      <Link href="/admin/sach" className="btn btn-ghost">
+        <span>Về quản lý sách</span>
       </Link>
     </StatusPage>
   );
 }
-

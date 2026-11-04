@@ -22,11 +22,10 @@ import styles from './Header.module.css';
 import { Logo } from './Logo';
 import { SearchBox } from './SearchBox';
 
-/** Mega menu: 10 danh mục đầu, mỗi danh mục 3 danh mục con — demo 07 */
 const MEGA_ROOTS = 10;
 const MEGA_CHILDREN = 3;
 
-/** Menu chính */
+/** Menu chính: dẫn tới trang chức năng thật (design-system Q5) */
 const NAV_LINKS = [
   { href: '/tim-kiem', label: 'Tất cả sách' },
   { href: '/#legends', label: 'Truyền thuyết' },
@@ -47,32 +46,30 @@ function DrawerAccount() {
   const { enqueueSnackbar } = useSnackbar();
   const { data: user, isPending } = useCurrentUser();
   const logout = useLogout();
-
   if (isPending) return null;
 
   if (!user) {
     return (
-      <Link href="/dang-nhap">
-        <IconUser />
-        Đăng nhập / Đăng ký
-      </Link>
+      <>
+        <p className={styles.drawerTitle}>Tài khoản</p>
+        <Link href="/dang-nhap">
+          <IconUser />
+          Đăng nhập
+        </Link>
+        <Link href="/dang-ky">
+          <IconPlus />
+          Đăng ký
+        </Link>
+      </>
     );
   }
 
   return (
     <>
-      <div className={styles.drawerUser}>
-        <span className={styles.drawerAvatar}>
-          {(user.fullName || user.email).charAt(0).toUpperCase()}
-        </span>
-        <div className={styles.drawerUserMeta}>
-          <span className={styles.drawerUserName}>{user.fullName || 'Khách hàng'}</span>
-          <span className={styles.drawerUserEmail}>{user.email}</span>
-        </div>
-      </div>
+      <p className={styles.drawerTitle}>{user.fullName || 'Khách hàng'}</p>
       <Link href="/tai-khoan">
         <IconUser />
-        Thông tin cá nhân
+        Tài khoản của tôi
       </Link>
       {user.role === 'CUSTOMER' && (
         <>
@@ -114,7 +111,7 @@ function DrawerAccount() {
 
 /**
  * Header cửa hàng Dark Fantasy (components.md 2.1):
- * burger (≤1180) · logo · menu + mega menu danh mục · ô tìm kiếm · tài khoản.
+ * burger (≤1180) · logo · menu + mega menu danh mục · ô tìm kiếm · yêu thích / tài khoản / giỏ.
  * Dính trên đầu trang, cuộn xuống thì trượt lên ẩn (body.scroll-down).
  */
 export function Header({ categories = [] }: { categories?: PublicCategoryNode[] }) {
@@ -138,12 +135,12 @@ export function Header({ categories = [] }: { categories?: PublicCategoryNode[] 
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.in}>
+        <div className={`wrap ${styles.hd}`}>
           <button
             type="button"
-            className={styles.burger}
-            onClick={() => setDrawerOpen((prev) => !prev)}
-            aria-label={drawerOpen ? 'Đóng menu' : 'Mở menu'}
+            className={`ic ${styles.burger}`}
+            onClick={() => setDrawerOpen(true)}
+            aria-label="Mở menu danh mục"
             aria-expanded={drawerOpen}
           >
             <IconMenu />
@@ -151,37 +148,31 @@ export function Header({ categories = [] }: { categories?: PublicCategoryNode[] 
 
           <Logo />
 
-          <nav className={styles.nav} aria-label="Điều hướng chính">
-            <div className={styles.megaTrigger}>
-              <button
-                type="button"
-                className={styles.megaBtn}
-                aria-haspopup="true"
-                aria-label="Danh mục sách"
-              >
-                <span>Danh mục</span>
-                <span className={styles.chev}>
-                  <IconPlus />
-                </span>
-              </button>
-
-              <div className={styles.mega} role="region" aria-label="Tất cả danh mục">
-                <div className={styles.megaGrid}>
+          <nav className={styles.nav} aria-label="Menu chính">
+            <div className={styles.hasMega}>
+              <Link href="/tim-kiem" aria-haspopup="true">
+                Vương quốc ▾
+              </Link>
+              <div className={styles.mega}>
+                <div className={`wrap ${styles.megaIn}`}>
                   {categories.slice(0, MEGA_ROOTS).map((root) => (
-                    <div key={root.id} className={styles.col}>
-                      <Link href={categoryHref(root.id)} className={styles.rootLink}>
+                    <div key={root.id}>
+                      <h4>
                         <Icon name={root.iconKey} />
-                        <span>{root.name}</span>
-                      </Link>
-                      <ul className={styles.subs}>
-                        {root.children.slice(0, MEGA_CHILDREN).map((sub) => (
-                          <li key={sub.id}>
-                            <Link href={categoryHref(sub.id)}>{sub.name}</Link>
+                        <Link href={categoryHref(root.id)}>{root.name}</Link>
+                      </h4>
+                      <ul>
+                        {root.children.slice(0, MEGA_CHILDREN).map((child) => (
+                          <li key={child.id}>
+                            <Link href={categoryHref(child.id)}>{child.name}</Link>
                           </li>
                         ))}
                       </ul>
                     </div>
                   ))}
+                  <Link href="/tim-kiem" className={styles.megaAll}>
+                    Xem tất cả vương quốc →
+                  </Link>
                 </div>
               </div>
             </div>

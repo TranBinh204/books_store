@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect } from 'react';
-import { StatusPage } from '@/components/ui/StatusPage';
+import { StatusPage } from '@/components/shop/StatusPage';
 
 // Lỗi ngoài khu cửa hàng (Thanh toán, Admin...) — bọc trong khung gốc nên không có menu cửa hàng
 export default function AppError({

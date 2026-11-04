@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Logo } from '@/components/layout/Logo';
-import { StatusPage } from '@/components/ui/StatusPage';
+import { StatusPage } from '@/components/shop/StatusPage';
 
 export const metadata: Metadata = {
   title: 'Không tìm thấy trang',
@@ -28,9 +28,13 @@ export default function NotFound() {
           </>
         }
         message="Đường dẫn bạn mở không có trong thư viện của chúng tôi."
+        showSearch
       >
         <Link href="/" className="btn btn-gold">
           <span>Về trang chủ</span>
+        </Link>
+        <Link href="/tim-kiem?sort=created_desc" className="btn btn-ghost">
+          <span>Xem sách mới</span>
         </Link>
       </StatusPage>
     </>

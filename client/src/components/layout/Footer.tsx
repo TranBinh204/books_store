@@ -3,12 +3,27 @@ import { Silhouette } from '@/components/fx/Silhouette';
 import styles from './Footer.module.css';
 import { Logo } from './Logo';
 
-/** Các cột link — thêm khi làm từng module */
-const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
-  { title: 'Khám phá', links: [{ href: '/', label: 'Trang chủ' }] },
+// Địa chỉ, hotline là nội dung tạm của demo — cập nhật khi có thông tin thật
+const COLUMNS = [
+  {
+    title: 'Khám phá',
+    links: [
+      { href: '/tim-kiem?sort=created_desc', label: 'Sách mới' },
+      { href: '/tim-kiem?sort=sold_desc', label: 'Bán chạy' },
+    ],
+  },
+  {
+    title: 'Hỗ trợ',
+    links: [
+      { href: '/tai-khoan/don-hang', label: 'Theo dõi đơn hàng' },
+      { href: '/tai-khoan', label: 'Tài khoản của tôi' },
+      { href: '/tai-khoan/yeu-thich', label: 'Sách yêu thích' },
+      { href: '/gio-hang', label: 'Giỏ hàng' },
+    ],
+  },
 ];
 
-/** Footer cửa hàng (bản khung) */
+/** Footer cửa hàng (components.md 2.2) — chỉ COD · VNPay (dự án không hỗ trợ Visa, Momo) */
 export function Footer() {
   return (
     <footer className={styles.site} data-pausable>
@@ -32,9 +47,17 @@ export function Footer() {
               </ul>
             </div>
           ))}
+          <div>
+            <h5>Thanh toán</h5>
+            <ul>
+              <li>COD · VNPay</li>
+              <li>Giao miễn phí toàn quốc</li>
+            </ul>
+          </div>
         </div>
         <div className={styles.bottom}>
           <span>© {new Date().getFullYear()} BookStore · Dự án học tập</span>
+          <span>Ảnh nền: Unsplash</span>
         </div>
       </div>
     </footer>
