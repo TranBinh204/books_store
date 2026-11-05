@@ -1,0 +1,52 @@
+/* Hộp thoại Thêm / Sửa voucher (docs/06-ui-ux/admin/13-voucher.md) */
+.form {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px !important;
+}
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.group + .group {
+  padding-top: 16px;
+  border-top: 1px solid rgba(181, 148, 106, 0.18);
+}
+.groupTitle {
+  font: 700 17px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.pair {
+  display: grid;
+  gap: 16px;
+}
+.switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+/* Mobile (toàn màn hình): nút Lưu dính đáy */
+.actions {
+  position: sticky;
+  bottom: 0;
+  background: var(--color-night-2);
+}
+
+@media (min-width: 640px) {
+  .pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 639px) {
+  .actions > * {
+    flex: 1;
+  }
+}
