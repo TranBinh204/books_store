@@ -3,6 +3,7 @@ import * as bookRepository from '../repositories/book.repository';
 import * as homeRepository from '../repositories/home.repository';
 import type { HomeData, HomeFeaturedBook, HomeReview } from '../types/home.types';
 import { toPublicItem } from './book.service';
+import * as voucherService from './voucher.service';
 
 // GET /api/home — gom dữ liệu công khai của trang chủ vào 1 request (A8),
 // docs/06-ui-ux/shop/01-trang-chu.md mục 4. Số lượng mỗi khối theo bố cục demo 07.
@@ -79,7 +80,11 @@ async function load(): Promise<HomeData> {
       safe('thống kê', () => homeRepository.getStats(), null),
       safe('truyền thuyết', loadFeatured, []),
       safe('flash sale', async () => null, null),
-      safe('voucher', async () => [], []),
+      safe(
+        'voucher',
+        async () => (await voucherService.listPublic()).slice(0, HOME_VOUCHER_LIMIT),
+        [],
+      ),
       safe('bán chạy', () => loadBooks('sold_desc', HOME_BESTSELLER_LIMIT), []),
       safe('sách mới', () => loadBooks('created_desc', HOME_NEWEST_LIMIT), []),
       safe('tác giả', () => homeRepository.findFeaturedAuthors(HOME_AUTHOR_LIMIT), []),

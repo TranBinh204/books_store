@@ -9,6 +9,7 @@ import { asyncHandler } from '../utils/asyncHandler';
 import addressRoutes from './address.routes';
 import { myCartRoutes } from './cart.routes';
 import meReviewRoutes from './me-review.routes';
+import meVoucherRoutes from './me-voucher.routes';
 import orderRoutes from './order.routes';
 import wishlistRoutes from './wishlist.routes';
 
@@ -46,5 +47,6 @@ router.use('/cart', myCartRoutes);
 router.use(meReviewRoutes);
 router.use('/orders', orderRoutes);
 router.use('/wishlist', wishlistRoutes);
+router.use('/vouchers', meVoucherRoutes);
 
 export default router;

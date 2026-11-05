@@ -10,6 +10,7 @@ import homeRoutes from './home.routes';
 import meRoutes from './me.routes';
 import paymentRoutes from './payment.routes';
 import searchRoutes from './search.routes';
+import voucherRoutes from './voucher.routes';
 
 const router = Router();
 
@@ -27,6 +28,8 @@ router.use('/books', bookRoutes);
 router.use('/authors', authorRoutes);
 router.use('/search', searchRoutes);
 router.use('/cart', publicCartRoutes);
+// Mã giảm giá công khai — trang chủ (M11)
+router.use('/vouchers', voucherRoutes);
 // Thanh toán VNPay: IPN, Return URL — công khai, kiểm tra chữ ký (M07)
 router.use('/payments', paymentRoutes);
 

@@ -12,6 +12,7 @@ import customerRoutes from './customer.routes';
 import { authorRoutes, publisherRoutes } from './named-entity.routes';
 import orderRoutes from './order.routes';
 import reviewRoutes from './review.routes';
+import voucherRoutes from './voucher.routes';
 
 const router = Router();
 
@@ -29,6 +30,9 @@ router.use('/customers', customerRoutes);
 
 // Đánh giá (M10)
 router.use('/reviews', reviewRoutes);
+
+// Voucher (M11)
+router.use('/vouchers', voucherRoutes);
 
 router.post('/uploads/images', uploadImages, asyncHandler(uploadController.uploadImages));
 router.get(
