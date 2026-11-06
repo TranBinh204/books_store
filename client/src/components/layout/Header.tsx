@@ -25,9 +25,9 @@ import { SearchBox } from './SearchBox';
 const MEGA_ROOTS = 10;
 const MEGA_CHILDREN = 3;
 
-/** Menu chính: dẫn tới trang chức năng thật (design-system Q5) */
+/** Menu chính: tên kể chuyện, dẫn tới trang chức năng thật (design-system Q5) */
 const NAV_LINKS = [
-  { href: '/tim-kiem', label: 'Tất cả sách' },
+  { href: '/flash-sale', label: 'Lời nguyền nửa đêm' },
   { href: '/#legends', label: 'Truyền thuyết' },
   { href: '/tim-kiem?sort=sold_desc', label: 'Bán chạy' },
   { href: '/tim-kiem?sort=created_desc', label: 'Sách mới' },
@@ -37,7 +37,7 @@ const NAV_LINKS = [
 const DRAWER_LINKS = [
   { href: '/tim-kiem', label: 'Tất cả sách' },
   { href: '/tim-kiem?sort=created_desc', label: 'Sách mới' },
-  ...NAV_LINKS.slice(1),
+  ...NAV_LINKS,
 ];
 
 /** Mục tài khoản trong drawer mobile (icon tài khoản ở Header bị ẩn ≤ 640px) */
