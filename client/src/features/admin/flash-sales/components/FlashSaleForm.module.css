@@ -1,0 +1,130 @@
+/* Form Flash Sale Admin (docs/06-ui-ux/admin/15-flash-sale-form.md); khung = `.a-panel`, thanh lưu = `.a-savebar` */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.section h2 {
+  margin-bottom: 16px;
+  font: 700 20px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pair {
+  display: grid;
+  gap: 16px;
+}
+.error {
+  font-size: 15px;
+  color: var(--color-ember);
+}
+.empty {
+  padding: 16px 0;
+  font-size: 15px;
+  color: var(--color-bone-2);
+}
+
+/* Danh sách sách: bảng ở desktop, thẻ ở mobile (cùng 1 cấu trúc, đổi bằng grid) */
+.list {
+  margin-top: 4px;
+}
+.head {
+  display: none;
+}
+.item {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.18);
+}
+.item:last-child {
+  border-bottom: 0;
+}
+.book {
+  display: flex;
+  min-width: 0;
+  grid-column: 1 / 3;
+  gap: 10px;
+}
+.bookText {
+  min-width: 0;
+  line-height: 1.35;
+}
+.title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-weight: 600;
+  color: var(--color-bone);
+}
+.sub {
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.del {
+  justify-self: end;
+}
+.cellSale {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sold {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.lbl {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+.input {
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .head,
+  .item {
+    grid-template-columns: minmax(220px, 1fr) 190px 110px 120px 120px 40px;
+    align-items: start;
+    gap: 16px;
+  }
+  .head {
+    display: grid;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(181, 148, 106, 0.35);
+    background: var(--color-moss-2);
+    font: 700 16px var(--font-heading);
+    color: var(--color-gold-hi);
+  }
+  .head > span:first-child {
+    padding-left: 6px;
+  }
+  .book {
+    grid-column: auto;
+  }
+  .del {
+    order: 1;
+  }
+  .sold {
+    grid-column: auto;
+    padding-top: 8px;
+  }
+  .lbl {
+    display: none;
+  }
+}
