@@ -3,6 +3,7 @@ import * as bookRepository from '../repositories/book.repository';
 import * as homeRepository from '../repositories/home.repository';
 import type { HomeData, HomeFeaturedBook, HomeReview } from '../types/home.types';
 import { toPublicItem } from './book.service';
+import * as flashSaleService from './flash-sale.service';
 import * as voucherService from './voucher.service';
 
 // GET /api/home — gom dữ liệu công khai của trang chủ vào 1 request (A8),
@@ -79,7 +80,7 @@ async function load(): Promise<HomeData> {
     await Promise.all([
       safe('thống kê', () => homeRepository.getStats(), null),
       safe('truyền thuyết', loadFeatured, []),
-      safe('flash sale', async () => null, null),
+      safe('flash sale', () => flashSaleService.getCurrent(), null),
       safe(
         'voucher',
         async () => (await voucherService.listPublic()).slice(0, HOME_VOUCHER_LIMIT),

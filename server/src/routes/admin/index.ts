@@ -9,6 +9,7 @@ import { asyncHandler } from '../../utils/asyncHandler';
 import bookRoutes from './book.routes';
 import categoryRoutes from './category.routes';
 import customerRoutes from './customer.routes';
+import flashSaleRoutes from './flash-sale.routes';
 import { authorRoutes, publisherRoutes } from './named-entity.routes';
 import orderRoutes from './order.routes';
 import reviewRoutes from './review.routes';
@@ -33,6 +34,8 @@ router.use('/reviews', reviewRoutes);
 
 // Voucher (M11)
 router.use('/vouchers', voucherRoutes);
+// Flash sale (M12)
+router.use('/flash-sales', flashSaleRoutes);
 
 router.post('/uploads/images', uploadImages, asyncHandler(uploadController.uploadImages));
 router.get(

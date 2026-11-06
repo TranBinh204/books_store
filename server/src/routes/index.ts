@@ -5,6 +5,7 @@ import authRoutes from './auth.routes';
 import bookRoutes from './book.routes';
 import { publicCartRoutes } from './cart.routes';
 import categoryRoutes from './category.routes';
+import flashSaleRoutes from './flash-sale.routes';
 import healthRoutes from './health.routes';
 import homeRoutes from './home.routes';
 import meRoutes from './me.routes';
@@ -30,6 +31,8 @@ router.use('/search', searchRoutes);
 router.use('/cart', publicCartRoutes);
 // Mã giảm giá công khai — trang chủ (M11)
 router.use('/vouchers', voucherRoutes);
+// Flash sale công khai (M12)
+router.use('/flash-sales', flashSaleRoutes);
 // Thanh toán VNPay: IPN, Return URL — công khai, kiểm tra chữ ký (M07)
 router.use('/payments', paymentRoutes);
 
