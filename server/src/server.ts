@@ -3,6 +3,7 @@ import { app } from './app';
 import { env } from './config/env';
 import { pool } from './db/pool';
 import { startExpireUnpaidOrdersJob } from './jobs/expire-unpaid-orders';
+import { startNotificationJobs } from './jobs/notification-jobs';
 import { seedDefaultAdmin } from './seeds/admin.seed';
 
 let server: Server | undefined;
@@ -24,8 +25,8 @@ async function start() {
     );
   }
 
-  // Tự huỷ đơn VNPay quá hạn thanh toán (M07)
-  stopJobs = [startExpireUnpaidOrdersJob()];
+  // Tự huỷ đơn VNPay quá hạn thanh toán (M07) · thông báo flash sale, xoá thông báo cũ (M13)
+  stopJobs = [startExpireUnpaidOrdersJob(), startNotificationJobs()];
 }
 
 async function shutdown(signal: string) {

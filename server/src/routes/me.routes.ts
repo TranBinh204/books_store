@@ -8,6 +8,7 @@ import { changePasswordSchema, updateProfileSchema } from '../schemas/profile.sc
 import { asyncHandler } from '../utils/asyncHandler';
 import addressRoutes from './address.routes';
 import { myCartRoutes } from './cart.routes';
+import meNotificationRoutes from './me-notification.routes';
 import meReviewRoutes from './me-review.routes';
 import meVoucherRoutes from './me-voucher.routes';
 import orderRoutes from './order.routes';
@@ -48,5 +49,6 @@ router.use(meReviewRoutes);
 router.use('/orders', orderRoutes);
 router.use('/wishlist', wishlistRoutes);
 router.use('/vouchers', meVoucherRoutes);
+router.use('/notifications', meNotificationRoutes);
 
 export default router;
