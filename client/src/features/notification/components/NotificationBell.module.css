@@ -1,0 +1,76 @@
+/* Hộp thả xuống của chuông (khung + mũi tên ở components/ui/HoverMenu) */
+.paper {
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  color: var(--color-bone);
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.25);
+}
+.head h2 {
+  margin: 0;
+  font: 700 20px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.head :global(.more) {
+  font-size: 14px;
+  cursor: pointer;
+}
+.scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(181, 148, 106, 0.4) transparent;
+}
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list > li + li {
+  border-top: 1px solid rgba(181, 148, 106, 0.18);
+}
+.wait {
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  font-size: 26px;
+  color: var(--color-gold-hi);
+}
+.wait span {
+  animation: spin 1.6s linear infinite;
+}
+.empty {
+  margin: 0;
+  padding: 28px 18px;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+.all {
+  display: block;
+  padding: 12px;
+  border-top: 1px solid rgba(181, 148, 106, 0.25);
+  text-align: center;
+  font: 700 16px var(--font-heading);
+  color: var(--color-gold-hi);
+  transition: background 0.25s;
+}
+.all:hover {
+  background: rgba(181, 148, 106, 0.12);
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wait span {
+    animation: none;
+  }
+}

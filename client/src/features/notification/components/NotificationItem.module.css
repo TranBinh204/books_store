@@ -1,0 +1,78 @@
+/* Một thông báo: dùng ở trang Thông báo và hộp thả xuống của chuông */
+.item {
+  position: relative;
+  display: flex;
+  width: 100%;
+  gap: 14px;
+  padding: 14px 18px;
+  border-left: 3px solid transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.item:hover {
+  background: rgba(181, 148, 106, 0.1);
+}
+.item[data-unread='true'] {
+  border-left-color: var(--color-gold-hi);
+  background: rgba(226, 196, 143, 0.06);
+}
+.icon {
+  --c: var(--color-gold-hi);
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--c);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+  color: var(--c);
+}
+.icon[data-tone='ok'] {
+  --c: #8fb08a;
+}
+.icon[data-tone='fail'] {
+  --c: var(--color-ember);
+}
+.icon[data-tone='muted'] {
+  --c: #8a918a;
+}
+.text {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+.title {
+  color: var(--color-bone);
+}
+.item[data-unread='true'] .title {
+  font-weight: 700;
+  color: var(--color-gold-hi);
+}
+.content {
+  font-size: 15px;
+  color: var(--color-bone-2);
+}
+.item[data-compact='true'] .content {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.time {
+  margin-top: 2px;
+  font-size: 13px;
+  color: #7f877f;
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  margin-top: 8px;
+  rotate: 45deg;
+  background: var(--color-gold-hi);
+  box-shadow: 0 0 8px rgba(226, 196, 143, 0.7);
+}

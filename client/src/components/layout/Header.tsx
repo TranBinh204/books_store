@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { Icon } from '@/components/ui/Icon';
 import {
+  IconBell,
   IconDesktop,
   IconHeart,
   IconLogout,
@@ -16,6 +17,7 @@ import {
 } from '@/components/ui/icons';
 import { AccountMenu, useCurrentUser, useLogout } from '@/features/auth';
 import { categoryHref, type PublicCategoryNode } from '@/features/catalog';
+import { NotificationBell } from '@/features/notification';
 import { errorMessage } from '@/lib/form';
 import { CartButton } from './CartButton';
 import styles from './Header.module.css';
@@ -77,6 +79,10 @@ function DrawerAccount() {
             <IconReceipt />
             Đơn hàng của tôi
           </Link>
+          <Link href="/tai-khoan/thong-bao">
+            <IconBell />
+            Thông báo
+          </Link>
           <Link href="/tai-khoan/yeu-thich">
             <IconHeart />
             Sách yêu thích
@@ -111,7 +117,7 @@ function DrawerAccount() {
 
 /**
  * Header cửa hàng Dark Fantasy (components.md 2.1):
- * burger (≤1180) · logo · menu + mega menu danh mục · ô tìm kiếm · yêu thích / tài khoản / giỏ.
+ * burger (≤1180) · logo · menu + mega menu danh mục · ô tìm kiếm · yêu thích / thông báo / tài khoản / giỏ.
  * Dính trên đầu trang, cuộn xuống thì trượt lên ẩn (body.scroll-down).
  */
 export function Header({ categories = [] }: { categories?: PublicCategoryNode[] }) {
@@ -193,6 +199,7 @@ export function Header({ categories = [] }: { categories?: PublicCategoryNode[] 
             <Link className="ic" href="/tai-khoan/yeu-thich" aria-label="Sách yêu thích">
               <IconHeart />
             </Link>
+            <NotificationBell className="ic" />
             <AccountMenu className="ic" />
             <CartButton className={`ic ${styles.keepMobile}`} />
           </div>
