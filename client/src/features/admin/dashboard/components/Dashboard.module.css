@@ -1,0 +1,216 @@
+/* Dashboard Admin: panel phẳng, thẻ chỉ số, bảng, việc cần làm (docs/06-ui-ux/admin/01-dashboard.md); khung panel = `.a-panel` trong ui.css */
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.panelHead h2 {
+  font: 700 20px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.link {
+  font-size: 15px;
+  color: var(--color-gold);
+}
+.link:hover {
+  color: var(--color-gold-hi);
+  text-decoration: underline;
+}
+.empty {
+  padding: 32px 0;
+  text-align: center;
+  font-size: 15px;
+  color: var(--color-bone-2);
+}
+
+/* ---------- Thẻ chỉ số ---------- */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.metric {
+  position: relative;
+  min-height: 118px;
+  overflow: hidden;
+  gap: 2px;
+}
+.metricLabel {
+  font: 600 17px var(--font-heading);
+  color: var(--color-bone-2);
+}
+.metricValue {
+  font: 700 34px/1.15 var(--font-heading);
+  color: var(--color-bone);
+}
+.metricChange {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  font-size: 14px;
+  color: var(--color-bone-2);
+}
+.up {
+  color: #6f9b75;
+}
+.down {
+  color: #e06060;
+}
+.metricNote {
+  font-size: 13px;
+  color: var(--color-bone-2);
+  opacity: 0.75;
+}
+.spark {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 38%;
+  max-width: 120px;
+  height: 32px;
+}
+
+/* ---------- Việc cần làm ---------- */
+.taskList > li + li {
+  border-top: 1px solid rgba(181, 148, 106, 0.18);
+}
+.taskRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 16px;
+  color: var(--color-bone);
+}
+.taskRow:hover {
+  color: var(--color-gold-hi);
+}
+.taskRow svg {
+  width: 18px;
+  color: var(--color-bone-2);
+}
+.count {
+  display: inline-block;
+  min-width: 28px;
+  padding: 0 8px;
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  border-radius: 99px;
+  font: 700 14px/24px var(--font-body);
+  text-align: center;
+  color: var(--color-bone-2);
+}
+.countAlert {
+  border-color: var(--color-blood);
+  background: var(--color-blood);
+  box-shadow: 0 0 10px rgba(224, 96, 96, 0.45);
+  color: #f6dcc8;
+}
+.subTitle {
+  margin: 16px 0 4px;
+  font: italic 500 16px var(--font-heading);
+  color: var(--color-bone-2);
+}
+.oldest {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 4px;
+  border-radius: 4px;
+  font-size: 15px;
+  color: var(--color-bone);
+}
+.oldest:hover {
+  background: rgba(181, 148, 106, 0.08);
+}
+.oldest b {
+  display: block;
+  font-weight: 600;
+  color: var(--color-gold-hi);
+}
+.oldest small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--color-bone-2);
+}
+.oldest > span:last-child {
+  flex: none;
+  font-weight: 600;
+}
+
+/* ---------- Bảng sách ---------- */
+.rank {
+  width: 32px;
+  color: var(--color-bone-2);
+  font-weight: 600;
+}
+.book {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-bone);
+}
+.book:hover {
+  color: var(--color-gold-hi);
+}
+.cover {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  overflow: hidden;
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  border-radius: 3px;
+}
+.clamp {
+  display: -webkit-box;
+  min-width: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* ---------- Sách sắp hết ---------- */
+.stockList > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 15px;
+}
+.stockList > li + li {
+  border-top: 1px solid rgba(181, 148, 106, 0.18);
+}
+.stockList .clamp {
+  flex: 1;
+}
+.stock {
+  flex: none;
+  padding: 1px 10px;
+  border: 1px solid var(--color-ember);
+  border-radius: 3px;
+  background: rgba(224, 128, 62, 0.12);
+  font: 600 14px var(--font-body);
+  color: var(--color-ember);
+}
+.stockOut {
+  border-color: var(--color-blood);
+  background: rgba(142, 43, 43, 0.35);
+  color: #f6dcc8;
+}
+
+@media (min-width: 1280px) {
+  .metrics {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 399px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+}
