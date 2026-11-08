@@ -9,6 +9,7 @@ import { asyncHandler } from '../../utils/asyncHandler';
 import bookRoutes from './book.routes';
 import categoryRoutes from './category.routes';
 import customerRoutes from './customer.routes';
+import { dashboardRoutes, reportRoutes } from './dashboard.routes';
 import flashSaleRoutes from './flash-sale.routes';
 import { authorRoutes, publisherRoutes } from './named-entity.routes';
 import orderRoutes from './order.routes';
@@ -36,6 +37,9 @@ router.use('/reviews', reviewRoutes);
 router.use('/vouchers', voucherRoutes);
 // Flash sale (M12)
 router.use('/flash-sales', flashSaleRoutes);
+// Dashboard & báo cáo CSV (M14)
+router.use('/dashboard', dashboardRoutes);
+router.use('/reports', reportRoutes);
 
 router.post('/uploads/images', uploadImages, asyncHandler(uploadController.uploadImages));
 router.get(
