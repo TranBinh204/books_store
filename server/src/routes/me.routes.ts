@@ -9,6 +9,7 @@ import { asyncHandler } from '../utils/asyncHandler';
 import addressRoutes from './address.routes';
 import { myCartRoutes } from './cart.routes';
 import meNotificationRoutes from './me-notification.routes';
+import meRecommendationRoutes from './me-recommendation.routes';
 import meReviewRoutes from './me-review.routes';
 import meVoucherRoutes from './me-voucher.routes';
 import orderRoutes from './order.routes';
@@ -50,5 +51,7 @@ router.use('/orders', orderRoutes);
 router.use('/wishlist', wishlistRoutes);
 router.use('/vouchers', meVoucherRoutes);
 router.use('/notifications', meNotificationRoutes);
+// Sở thích đọc sách + AI gợi ý sách (M15): /preferences, /recommendations
+router.use(meRecommendationRoutes);
 
 export default router;
