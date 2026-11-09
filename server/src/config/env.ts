@@ -82,6 +82,27 @@ const envSchema = z
     // Đánh giá (F15) — khách sửa đánh giá của mình trong số ngày này
     REVIEW_EDIT_DAYS: z.coerce.number().int().positive().default(30),
 
+    // AI gợi ý sách (F20 – M15) — bỏ trống GROQ_API_KEY = tắt AI (chỉ gợi ý theo điểm DB)
+    GROQ_API_KEY: z.string().optional(),
+    GROQ_BASE_URL: z.url().default('https://api.groq.com/openai/v1'),
+    GROQ_MODEL: z.string().min(1).default('openai/gpt-oss-120b'),
+    GROQ_FALLBACK_MODEL: z.string().optional(),
+    GROQ_REASONING_EFFORT: z
+      .enum(['low', 'medium', 'high', ''])
+      .optional()
+      .transform((value) => value || undefined),
+    AI_TIMEOUT_MS: z.coerce.number().int().positive().default(15000),
+    RECOMMEND_CANDIDATES: z.coerce.number().int().positive().max(50).default(20),
+    RECOMMEND_DESCRIPTION_MAX_LENGTH: z.coerce.number().int().nonnegative().default(200),
+    RECOMMEND_RESULT_SIZE: z.coerce.number().int().positive().default(8),
+    RECOMMEND_REASON_MAX_LENGTH: z.coerce.number().int().positive().default(200),
+    RECOMMEND_CACHE_HOURS: z.coerce.number().positive().default(12),
+    PREFERENCE_MAX_CATEGORIES: z.coerce.number().int().positive().default(10),
+    PREFERENCE_MAX_AUTHORS: z.coerce.number().int().positive().default(10),
+    PREFERENCE_NOTE_MAX_LENGTH: z.coerce.number().int().positive().default(300),
+    RATE_LIMIT_RECOMMEND_MAX: z.coerce.number().int().positive().default(5),
+    RATE_LIMIT_RECOMMEND_WINDOW_MINUTES: z.coerce.number().positive().default(15),
+
     // Thanh toán VNPay (F12) — docs/04-integrations/vnpay-sandbox.md
     // Bỏ trống TMN_CODE + HASH_SECRET = tắt VNPay (chỉ nhận COD)
     VNPAY_TMN_CODE: z.string().optional(),
@@ -149,4 +170,6 @@ export const env = {
   isTest: data.NODE_ENV === 'test',
   /** Đã điền mã website + khoá bí mật VNPay */
   vnpayEnabled: Boolean(data.VNPAY_TMN_CODE && data.VNPAY_HASH_SECRET),
+  /** Đã điền khoá Groq → bật AI gợi ý sách */
+  aiEnabled: Boolean(data.GROQ_API_KEY),
 };

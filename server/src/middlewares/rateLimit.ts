@@ -70,6 +70,12 @@ export const registerResendLimiter = createLimiter({
   max: env.RATE_LIMIT_REGISTER_RESEND_MAX,
 });
 
+// "Gợi ý lại" (M15) — mỗi lần gọi AI tốn hạn mức token của gói Groq miễn phí
+export const recommendRefreshLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_RECOMMEND_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_RECOMMEND_MAX,
+});
+
 export const forgotPasswordLimiter = createLimiter({
   windowMinutes: env.RATE_LIMIT_FORGOT_PASSWORD_WINDOW_MINUTES,
   max: env.RATE_LIMIT_FORGOT_PASSWORD_MAX,
