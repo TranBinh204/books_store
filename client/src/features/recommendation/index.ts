@@ -1,5 +1,6 @@
 export { HomeRecommendations } from './components/HomeRecommendations';
 export { PreferenceOnboardingDialog } from './components/PreferenceOnboardingDialog';
+export { PreferencePage } from './components/PreferencePage';
 export { RecommendationPage } from './components/RecommendationPage';
 export {
   PREFERENCES_PATH,
