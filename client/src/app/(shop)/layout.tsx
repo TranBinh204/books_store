@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { RuneBar } from '@/components/layout/RuneBar';
 import { catalogApi, type PublicCategoryNode } from '@/features/catalog';
+import { PreferenceOnboardingDialog } from '@/features/recommendation';
 
 /** Cây danh mục cho menu — lỗi API thì menu rỗng, không làm hỏng cả trang */
 async function loadCategories(): Promise<PublicCategoryNode[]> {
@@ -28,6 +29,8 @@ export default async function ShopLayout({ children }: LayoutProps<'/'>) {
       <main className="flex flex-1 flex-col">{children}</main>
       <Footer />
       <BackToTop />
+      {/* Hỏi sở thích đọc sách ở lần đăng nhập đầu (M15) */}
+      <PreferenceOnboardingDialog />
       {/* Hiệu ứng dùng chung (data-reveal, data-tilt…) + con trỏ Dark Fantasy, bụi tiên khi bấm — chỉ ở cửa hàng */}
       <MotionRoot />
       <ClickDust />

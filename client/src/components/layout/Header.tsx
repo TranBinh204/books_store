@@ -31,8 +31,8 @@ const MEGA_CHILDREN = 3;
 const NAV_LINKS = [
   { href: '/flash-sale', label: 'Lời nguyền nửa đêm' },
   { href: '/#legends', label: 'Truyền thuyết' },
+  { href: '/goi-y-sach', label: 'Tiên tri AI' },
   { href: '/tim-kiem?sort=sold_desc', label: 'Bán chạy' },
-  { href: '/tim-kiem?sort=created_desc', label: 'Sách mới' },
 ];
 
 /** Link nhanh đầu drawer mobile */

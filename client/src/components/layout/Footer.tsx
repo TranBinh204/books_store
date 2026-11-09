@@ -11,6 +11,7 @@ const COLUMNS = [
       { href: '/tim-kiem?sort=created_desc', label: 'Sách mới' },
       { href: '/tim-kiem?sort=sold_desc', label: 'Bán chạy' },
       { href: '/flash-sale', label: 'Flash Sale' },
+      { href: '/goi-y-sach', label: 'Tiên tri AI' },
     ],
   },
   {
