@@ -103,6 +103,17 @@ const envSchema = z
     RATE_LIMIT_RECOMMEND_MAX: z.coerce.number().int().positive().default(5),
     RATE_LIMIT_RECOMMEND_WINDOW_MINUTES: z.coerce.number().positive().default(15),
 
+    // Chatbox tư vấn AI (F21 – M16) — dùng chung GROQ_* / AI_TIMEOUT_MS với M15
+    CHAT_MAX_MESSAGE_LENGTH: z.coerce.number().int().positive().default(500),
+    CHAT_HISTORY_MESSAGES: z.coerce.number().int().nonnegative().default(6),
+    CHAT_HISTORY_PAGE_SIZE: z.coerce.number().int().positive().max(100).default(30),
+    CHAT_MAX_TOOL_ROUNDS: z.coerce.number().int().positive().max(5).default(2),
+    CHAT_SEARCH_LIMIT: z.coerce.number().int().positive().max(20).default(5),
+    CHAT_ORDER_LIMIT: z.coerce.number().int().positive().max(20).default(5),
+    CHAT_RETENTION_DAYS: z.coerce.number().int().positive().default(30),
+    RATE_LIMIT_CHAT_MAX: z.coerce.number().int().positive().default(10),
+    RATE_LIMIT_CHAT_WINDOW_MINUTES: z.coerce.number().positive().default(10),
+
     // Thanh toán VNPay (F12) — docs/04-integrations/vnpay-sandbox.md
     // Bỏ trống TMN_CODE + HASH_SECRET = tắt VNPay (chỉ nhận COD)
     VNPAY_TMN_CODE: z.string().optional(),

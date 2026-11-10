@@ -43,8 +43,6 @@ export function createLimiter({
   });
 }
 
-
-
 // -------- Auth limiters (M01) --------
 // Đăng nhập: chỉ đếm lần SAI — đăng nhập đúng không bị tính
 export const loginLimiter = createLimiter({
@@ -74,6 +72,13 @@ export const registerResendLimiter = createLimiter({
 export const recommendRefreshLimiter = createLimiter({
   windowMinutes: env.RATE_LIMIT_RECOMMEND_WINDOW_MINUTES,
   max: env.RATE_LIMIT_RECOMMEND_MAX,
+});
+
+// Gửi tin chatbox (M16) — mỗi tin tốn 1–3 lần gọi AI; đếm theo tài khoản
+export const chatLimiter = createLimiter({
+  windowMinutes: env.RATE_LIMIT_CHAT_WINDOW_MINUTES,
+  max: env.RATE_LIMIT_CHAT_MAX,
+  keyByUser: true,
 });
 
 export const forgotPasswordLimiter = createLimiter({

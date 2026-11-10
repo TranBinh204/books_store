@@ -252,7 +252,7 @@ describe('Gợi ý sách /api/me/recommendations', () => {
   });
 
   it('cache quá RECOMMEND_CACHE_HOURS → gợi ý lại', async () => {
-    const { books, categories } = await seedCatalog();
+    const { books } = await seedCatalog();
     const { auth } = await newCustomer();
     aiPicks({ bookId: books.paulo, reason: 'Hay' });
     await api(auth).recommend();
