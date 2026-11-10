@@ -1,0 +1,363 @@
+/* Chatbox "Pháp sư thủ thư" — demo 07 (.chat-fab, .chat-panel, .chat-top, .msg, .chips, .cb) */
+
+/* ---------- Bong bóng: quả cầu tím phập phồng ---------- */
+.fab {
+  position: fixed;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.45), transparent 30%),
+    radial-gradient(circle, #5a4a9a, #1d1840);
+  box-shadow: 0 0 30px rgba(180, 140, 255, 0.55);
+  color: #fff;
+  font-size: 24px;
+  text-shadow: 0 0 12px #b48cff;
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+  animation: var(--animate-pulse-orb);
+  transition: transform 0.4s var(--ease-spring);
+}
+.fab:hover {
+  transform: scale(1.1);
+}
+.dragging {
+  transform: scale(1.15);
+  cursor: grabbing;
+  opacity: 0.9;
+}
+
+/* ---------- Khung chat ---------- */
+.panel {
+  position: fixed;
+  bottom: 24px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  width: 370px;
+  height: 540px;
+  max-height: calc(100dvh - 48px);
+  background: var(--color-night-2);
+  border: 1px solid var(--color-gold);
+  box-shadow:
+    0 0 60px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(180, 140, 255, 0.15);
+  animation: open 0.5s var(--ease-spring);
+}
+.right {
+  right: 24px;
+  transform-origin: bottom right;
+}
+.left {
+  left: 24px;
+  transform-origin: bottom left;
+}
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: scale(0.5) rotate(8deg);
+  }
+}
+.top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(181, 148, 106, 0.3);
+  background: linear-gradient(90deg, rgba(90, 74, 154, 0.25), transparent);
+}
+.miniBall {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.5), transparent 30%),
+    radial-gradient(circle, #5a4a9a, #1d1840);
+  box-shadow: 0 0 14px rgba(180, 140, 255, 0.6);
+}
+.top b {
+  display: block;
+  font: 700 19px var(--font-heading);
+  color: var(--color-gold-hi);
+}
+.top small {
+  font-size: 13px;
+  font-style: italic;
+  color: #9ed1a5;
+}
+.topBtn {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-gold);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.topBtn:hover:not(:disabled) {
+  color: var(--color-gold-hi);
+}
+.topBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.topBtn svg {
+  width: 18px;
+}
+.actions {
+  display: flex;
+  margin-left: auto;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+}
+.older {
+  align-self: center;
+  font: 600 14px var(--font-heading);
+  color: var(--color-gold-hi);
+  border-bottom: 1px solid var(--color-gold);
+  cursor: pointer;
+}
+.note {
+  align-self: center;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+
+/* ---------- Tin nhắn ---------- */
+.msg {
+  max-width: 86%;
+  padding: 10px 14px;
+  font-size: 15px;
+  line-height: 1.45;
+  white-space: pre-line;
+  animation: var(--animate-rise);
+  animation-duration: 0.4s;
+}
+.bot {
+  align-self: flex-start;
+  background: rgba(44, 74, 62, 0.5);
+  border: 1px solid rgba(181, 148, 106, 0.2);
+  color: var(--color-bone);
+}
+.bot a {
+  color: var(--color-gold-hi);
+  text-decoration: underline;
+}
+.user {
+  align-self: flex-end;
+  background: var(--color-gold);
+  color: var(--color-night);
+}
+.failedMsg {
+  opacity: 0.55;
+}
+.failed {
+  align-self: flex-end;
+  font-size: 12.5px;
+  color: #e06060;
+}
+.failed button {
+  margin-left: 6px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.typing {
+  display: flex;
+  gap: 5px;
+}
+.typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-gold-hi);
+  animation: var(--animate-blink);
+}
+.typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ---------- Thẻ sách trong chat ---------- */
+.books {
+  display: grid;
+  gap: 6px;
+  width: 92%;
+  margin-top: -4px;
+}
+.cb {
+  position: relative;
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 5px;
+  background: rgba(14, 19, 17, 0.6);
+  transition: background 0.25s;
+}
+.cb:hover {
+  background: rgba(181, 148, 106, 0.15);
+}
+.cbCover {
+  position: relative;
+  width: 32px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+}
+/* Link phủ cả thẻ (bấm đâu cũng mở trang sách), nút thêm giỏ nằm trên */
+.cbLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.cb b {
+  display: block;
+  font: 700 15px/1.2 var(--font-heading);
+  color: var(--color-bone);
+}
+.cb small {
+  color: var(--color-gold-hi);
+}
+.cb s {
+  margin-left: 6px;
+  font-size: 12px;
+  color: #7f877f;
+}
+.cbAdd {
+  position: relative;
+  z-index: 1;
+  --size: 30px;
+  margin-right: 6px;
+}
+.reason {
+  grid-column: 2 / -1;
+  font-size: 12.5px;
+  font-style: italic;
+  color: var(--color-bone-2);
+}
+.reason em {
+  font-style: normal;
+  color: var(--color-gold-hi);
+}
+
+/* ---------- Câu hỏi có sẵn + ô nhập ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 64px;
+  overflow-y: auto;
+  padding: 8px 16px 10px;
+  scrollbar-width: thin;
+}
+.chips button {
+  flex: none;
+  padding: 3px 10px;
+  border: 1px solid rgba(181, 148, 106, 0.4);
+  color: var(--color-bone-2);
+  font-size: 13.5px;
+  font-style: italic;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.chips button:hover:not(:disabled) {
+  color: var(--color-gold-hi);
+  border-color: var(--color-gold-hi);
+}
+.chips button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid rgba(181, 148, 106, 0.3);
+}
+.form textarea {
+  flex: 1;
+  min-width: 0;
+  max-height: 96px;
+  padding: 10px 14px;
+  resize: none;
+  background: rgba(239, 232, 220, 0.05);
+  border: 1px solid rgba(181, 148, 106, 0.35);
+  color: var(--color-bone);
+  font: italic 15px/1.3 var(--font-body);
+  outline: none;
+}
+.form textarea:focus {
+  border-color: var(--color-gold-hi);
+}
+.send {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  align-self: flex-end;
+  background: var(--color-gold);
+  color: var(--color-night);
+  cursor: pointer;
+}
+.send:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.send svg {
+  width: 18px;
+}
+.hint {
+  padding: 0 12px 10px;
+  font-size: 11.5px;
+  color: #6f776f;
+}
+
+/* ---------- Mời đăng nhập ---------- */
+.login {
+  height: auto;
+  padding: 0 0 18px;
+}
+.loginBody {
+  display: grid;
+  gap: 14px;
+  padding: 18px 18px 0;
+  text-align: center;
+  color: var(--color-bone-2);
+  font-size: 15px;
+}
+.loginBtns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .panel {
+    inset: 0;
+    width: auto;
+    height: auto;
+    max-height: none;
+    border: 0;
+  }
+  .login {
+    inset: auto 16px 16px;
+    border: 1px solid var(--color-gold);
+  }
+}
