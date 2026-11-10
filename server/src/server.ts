@@ -2,6 +2,7 @@ import type { Server } from 'node:http';
 import { app } from './app';
 import { env } from './config/env';
 import { pool } from './db/pool';
+import { startChatCleanupJob } from './jobs/chat-cleanup';
 import { startExpireUnpaidOrdersJob } from './jobs/expire-unpaid-orders';
 import { startNotificationJobs } from './jobs/notification-jobs';
 import { seedDefaultAdmin } from './seeds/admin.seed';
@@ -26,7 +27,8 @@ async function start() {
   }
 
   // Tự huỷ đơn VNPay quá hạn thanh toán (M07) · thông báo flash sale, xoá thông báo cũ (M13)
-  stopJobs = [startExpireUnpaidOrdersJob(), startNotificationJobs()];
+  // · xoá tin chatbox cũ (M16)
+  stopJobs = [startExpireUnpaidOrdersJob(), startNotificationJobs(), startChatCleanupJob()];
 }
 
 async function shutdown(signal: string) {

@@ -8,6 +8,7 @@ import { changePasswordSchema, updateProfileSchema } from '../schemas/profile.sc
 import { asyncHandler } from '../utils/asyncHandler';
 import addressRoutes from './address.routes';
 import { myCartRoutes } from './cart.routes';
+import meChatRoutes from './me-chat.routes';
 import meNotificationRoutes from './me-notification.routes';
 import meRecommendationRoutes from './me-recommendation.routes';
 import meReviewRoutes from './me-review.routes';
@@ -53,5 +54,7 @@ router.use('/vouchers', meVoucherRoutes);
 router.use('/notifications', meNotificationRoutes);
 // Sở thích đọc sách + AI gợi ý sách (M15): /preferences, /recommendations
 router.use(meRecommendationRoutes);
+// Chatbox tư vấn AI (M16)
+router.use('/chat', meChatRoutes);
 
 export default router;
